@@ -11,6 +11,7 @@
             return false;}
             );
     </script>
+    
     <div class="section type-2">
         <div class="container">
             <div class="section-headlines">
@@ -18,31 +19,29 @@
             </div>
         </div>
 
-    <div class="col-8 list-group" style="margin: auto;">
+        <div class="col-8 list-group" style="margin: auto;">
 
-    {% for research in previousResearches %}
-        <a href="{% url 'results' research_id=research.researchId %}" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">
-                    {{ research.researchDate }}
-                </h5>
-                <small>{{ research.numberOfTweets }} tweets collected </small>
-            </div>
+            {% for research in previousResearches %}
+                <a href="{% url 'results' research_id=research.researchId %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">
+                            {{ research.researchDate }}
+                        </h5>
+                        <small>{{ research.numberOfTweets }} tweets collected </small>
+                    </div>
 
-        <p class="mb-1">
+                <p class="mb-1">
 
-            {% if research.researchType.type == 'Stream'  %}
-                keywords : '{{ research.getKeywords }}'
-            {% elif research.researchType.type == 'OffStream' %}
-                screen name :
-            {% endif %}
+                    {% if research.researchType.type == 'Stream'  %}
+                        keywords : '{{ research.getKeywords }}'
+                    {% elif research.researchType.type == 'OffStream' %}
+                        screen name :
+                    {% endif %}
 
-        </p>
-            <small>Type : {{ research.researchType.type }}</small>
-        </a>
-        <br class="gap-70">
-
-
+                </p>
+                    <small>Type : {{ research.researchType.type }}</small>
+                </a>
+                <br class="gap-70">
 
 
 
@@ -65,30 +64,28 @@
 
 
 
-        <!--
-        <div class ="prev-details">
-            <ul  href="" class="list-group">
-                <li class="list-group-item" style="width: 800px;height: 100px;">
-                    <span class="badge"> Type : {{ research.researchType.type }} <br>
-                    {{ research.numberOfTweets }} tweets collected
-                    </span>
-
-                    {{ research.researchDate }} <br> {{ research.ratio }} tweets/s <br>
-                    {{ research.resultsFileName }} <br>
 
 
-                </li>
-            </ul>
+                <!--
+                <div class ="prev-details">
+                    <ul  href="" class="list-group">
+                        <li class="list-group-item" style="width: 800px;height: 100px;">
+                            <span class="badge"> Type : {{ research.researchType.type }} <br>
+                            {{ research.numberOfTweets }} tweets collected
+                            </span>
+
+                            {{ research.researchDate }} <br> {{ research.ratio }} tweets/s <br>
+                            {{ research.resultsFileName }} <br>
+
+
+                        </li>
+                    </ul>
+                </div>
+                -->
+
+
+            {% endfor %}
         </div>
-        -->
-
-
-    {% endfor %}
-
-
-    </div>
-
-
     </div>
     <br class="gap-70">
 {% endblock %}

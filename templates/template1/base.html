@@ -25,21 +25,25 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg"  role="navigation">
+<nav class="navbar navbar-expand-lg navbar-light"  role="navigation">
     <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <img style="width: 150px; height: 45px;" src="../../static/images/Tweets_analyzer.png" alt="" />
-        </a>
-      </div>
-        <div class="navbar-collapse hidden-xs " style="margin: auto;margin-left: 450px;">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'home' %}">Home</a></li>
-          <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'search' %}">Search for tweets</a></li>
-          <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'PreviousResearches' %}">Previous researchs</a></li>
-          <li class="nav-item active"><a class="nav-link text-dark" href="#jump4">Our Team</a></li>
-            <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'admin:index' %}">Admin section</a></li>
-        </ul>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img style="width: 150px; height: 45px;" src="../../static/images/Tweets_analyzer.png" alt="" />
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse hidden-xs " style="margin: auto;margin-left: 450px;" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'search' %}">Search for tweets</a></li>
+                <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'PreviousResearches' %}">Previous researchs</a></li>
+                <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'home' %}#team">Our Team</a></li>
+                <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'admin:index' %}">Admin section</a></li>
+            </ul>
       </div>
     </div>
 </nav>
@@ -63,11 +67,9 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="row ">
-
-        <div style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid
-        </div>
-    </div>
+      <div class="row ">
+          <div class="mx-auto" style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid</div>
+      </div>
   </div>
 </footer>
 
