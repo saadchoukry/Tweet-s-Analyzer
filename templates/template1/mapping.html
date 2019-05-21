@@ -1,0 +1,45 @@
+{% extends 'template1/base.html' %}
+
+{% block title %} Mapping{% endblock %}
+{% block mapping %}
+
+<div class="section type-2" style="padding-bottom: 0">
+    <div class="section-headlines">
+    <h4>Mapping</h4>
+    </div>
+<script src="../../static/scripts/d3.min.js"></script>
+<script src="../../static/scripts/topojson.min.js"></script>
+<script src="../../static/scripts/datamaps_world_min.js"></script>
+<div id="container180" style="position: relative; margin:auto;height: 700px;"></div>
+<script>
+    var received_data  = {{ dataToSendToJs|safe }}
+    console.log(received_data)
+    var map = new Datamap({element: document.getElementById('container180'),
+    fills: {
+
+            HIGH: '#CB4335',
+            LOW: '#5ac748',
+            MEDIUM: '#2650c7',
+            defaultFill: 'grey'
+        },
+        data: received_data,
+        geographyConfig: {
+        popupTemplate: function (geo, data) {
+            return ['<div class="hoverinfo"><strong>',
+                 geo.properties.name,
+                ': ' + data.numberOfThings + ' user(s)',
+                '</strong></div>'].join('');
+        }
+    }
+
+    });
+    // Draw a legend for this map
+
+    map.legend();
+</script>
+</div>
+
+    <br class="gap-70">
+    <br class="gap-70">
+    <br class="gap-70">
+{% endblock %}

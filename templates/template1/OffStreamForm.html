@@ -1,0 +1,57 @@
+{% extends 'template1/base.html' %}
+{% block title %}OffStream search{% endblock %}
+{% block form %}
+
+    <div class="section type-2" style="margin: auto;">
+            <div class="section-headlines">
+            <h4>OffStream search</h4>
+            </div>
+    <div class="btn-group" >
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+        </button>
+            <div class="dropdown-menu">
+                <a  class="dropdown-item " href="{% url 'byScreenName' %}">
+                    By screen name</a>
+                <a  class="dropdown-item " href="{% url 'byHashTag' %}">
+                    By Hashtag</a>
+                <a  class="dropdown-item " href="{% url 'byKeywords' %}">
+                    By keywords</a>
+            <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"></a>
+            </div>
+    </div>
+
+
+
+
+        <!--
+            <div style="margin: auto;">
+                <a href="{% url 'streamingsearch' %}"><button style="width:150px ;height:50px ; font-size: large;" class="btn btn-primary">By screen name</button></a>
+                <a href="{% url 'streamingsearch' %}"><button style="width:150px ;height:50px ; font-size: large;" class="btn btn-primary">By hashtags</button></a>
+                <a href="{% url 'offstreamsearch' %}"><button style="width:150px ;height:50px ;font-size: large;" class="btn btn-primary">By keywords</button></a>
+            </div>
+    <br class="gap-30">
+    </div>
+
+            <form action="" class="form form-control">
+                <label for="screen_name">Screen name: </label>
+                <input type="text" class="input form-control" id="screen_name"><br>
+
+                <label for="numberOfTweets">Limit number of tweets: </label>
+                <input id="numberOfTweets" class="input form-control" type="number"><br>
+
+                <label for="startDate">Start date: </label>
+                <input id="startDate" class="input form-control" type="date"><br>
+
+                <label for="endDate">End date: </label>
+                <input id="endDate" class="input form-control" type="date"><br>
+                <button style="width:150px;height:40px ;" class="btn btn-primary form-control">Search</button>
+
+                <br>
+            </form>
+            -->
+
+
+
+{% endblock %}

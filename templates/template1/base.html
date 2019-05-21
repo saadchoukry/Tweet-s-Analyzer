@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{% endblock %}</title>
+
+<!-- Stylesheets -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" type="text/css">
+<!--<link type="text/css" href="../../static/bootstrap/css/bootstrap.css" rel="stylesheet">-->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500italic,500,300italic,300' rel='stylesheet' type='text/css'>
+<link type="text/css" href="../../static/icons/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link type="text/css" href="../../static/icons/rondo/style.css" rel="stylesheet">
+<link type="text/css" href="../../static/css/theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+
+
+    <link  rel="icon" href="../../static/images/logo3.png">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg"  role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img style="width: 150px; height: 45px;" src="../../static/images/Tweets_analyzer.png" alt="" />
+        </a>
+      </div>
+        <div class="navbar-collapse hidden-xs " style="margin: auto;margin-left: 450px;">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'search' %}">Search for tweets</a></li>
+          <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'PreviousResearches' %}">Previous researchs</a></li>
+          <li class="nav-item active"><a class="nav-link text-dark" href="#jump4">Our Team</a></li>
+            <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'admin:index' %}">Admin section</a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+
+{% block previousResearches %} {% endblock %}
+{% block splash-block %}{% endblock %}
+{% block our_services %}{% endblock %}
+{% block tweets_search %}{% endblock %}
+{% block stats %}{% endblock %}
+{% block team %}{% endblock %}
+{% block recap %} {% endblock %}
+{% block samples %}{% endblock %}
+{% block neovis %}{% endblock %}
+{% block form %}{% endblock %}
+{% block mapping %}{% endblock %}
+{% block sections %}{% endblock %}
+{% block contact_us %}{% endblock %}
+{% block partners %}{% endblock %}
+{% block idDoesNotExist %} {% endblock %}
+
+<footer class="footer">
+  <div class="container">
+    <div class="row ">
+
+        <div style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid
+        </div>
+    </div>
+  </div>
+</footer>
+
+</body>

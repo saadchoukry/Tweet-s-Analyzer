@@ -1,0 +1,76 @@
+{% extends 'template1/base.html' %}
+
+{% block recap %}
+    <div  class="section type-2" style="padding-bottom: 0">
+        <div class="section-headlines">
+    <h4>Recap</h4>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 text-center ">
+                    <div class="border rounded p-3 m-0 list-group-item-action">
+                    <i class="far fa-file h1 "></i><br>
+                    Research Id: {{ research.researchId }}
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="border rounded p-3 m-0  list-group-item-action">
+                        <i class="fas fa-search h1"></i><br>
+                        {{ research.keywords }}
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="border rounded p-3 m-0  list-group-item-action">
+                    <i class="fab fa-twitter h1"></i><br>
+                    {{ research.numberOfTweets }} Tweets collected
+                    </div>
+                </div>
+
+            </div>
+
+            <br class="gap-70">
+            <div class="row">
+                <div class="col-lg-4 text-center">
+                    <div class="border rounded p-3 m-0  list-group-item-action ">
+                    <i class="fas fa-clock h1"></i><br>
+                    {{ research.researchDate }}
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                        <div class="border rounded p-3 m-0  list-group-item-action">
+                            <i class="fas fa-stopwatch h1"></i> <br>
+                            {{ research.streamingDuration }} seconds
+                        </div>
+                    </div>
+                <div class="col-lg-4 text-center">
+                    <div class="border rounded p-3 m-0  list-group-item-action">
+                    <i class="fas fa-tachometer-alt h1"></i><br>
+                    {{ research.ratio }} Tweets/s
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        </div>
+    <br class="gap-70">
+    <div class="row">
+        <div class="" style="margin: auto;">
+            <a href="{% url 'visualization' research.researchId %}">
+                <button  class="btn btn-primary" style="width: 170px;height:50px;">Visualization</button>
+            </a>
+
+            <a href="{% url 'mapping' research.researchId %}" >
+                <button  class="btn btn-primary" style="width: 170px;height:50px;">Mapping</button>
+            </a>
+
+        </div>
+    </div>
+    <br class="gap-70">
+{% endblock %}
+
+
+
+
