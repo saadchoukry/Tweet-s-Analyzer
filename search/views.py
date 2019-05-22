@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
-
-from static.scripts.Twitter_Offstream import byHashTag
-from static.scripts.Twitter_Offstream import byScreenName
-from static.scripts.Twitter_Stream import twitter_streamer
 from .forms import *
-from static.scripts.Twitter_Stream.JsonParser import StringToArray
 from .models import *
+
+import byHashTag
+import byScreenName
+import twitter_streamer
+from JsonParser import StringToArray
 from results import views as resultsViews
-from static.scripts.Twitter_Offstream import ByKeyWord
+import ByKeyWord
 
 
 def home(request):

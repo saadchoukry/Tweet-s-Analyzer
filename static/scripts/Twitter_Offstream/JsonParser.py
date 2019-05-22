@@ -52,3 +52,8 @@ def jsonParser(keywords):
 def StringToArray(string):
     array=re.compile(" +").split(string)
     return array
+
+def get_json(research):
+    jsonFile = open(research.resultsFileName, 'r')
+    data = jsonFile.read()
+    return json.loads(data)

@@ -17,7 +17,6 @@
 			server_user:"neo4j",
 			server_password:"123456",
 				initial_cypher: "MATCH (a)-[r]-(b) return a,r,b",
-
 		};
     		return new NeoVis.default(config);
     }

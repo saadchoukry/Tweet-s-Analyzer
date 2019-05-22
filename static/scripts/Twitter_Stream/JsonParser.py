@@ -4,6 +4,11 @@ import os
 import re
 
 
+def get_json(research):
+    jsonFile = open(research.resultsFileName, 'r')
+    data = jsonFile.read()
+    return json.loads(data)
+
 def jsonParser2(researchId):
 
     file = open('static/collected_data/results_{}.json'.format(researchId),'r')

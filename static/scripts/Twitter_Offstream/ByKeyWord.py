@@ -6,7 +6,7 @@ from sys import argv
 # Authentification
 from tweepy import API, Cursor
 
-from .authentification import TwitterAuth
+from authentification import TwitterAuth
 
 
 

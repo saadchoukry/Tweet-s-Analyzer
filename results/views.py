@@ -6,7 +6,10 @@ from py2neo import Node, Relationship, Graph, NodeMatcher
 from search.models import research as R
 from geopy.geocoders import Nominatim
 import pycountry
+from nodesRelationshipsCreator import nodesRelationshipsCreator
+from JsonParser import get_json
 
+"""
 nodeCount = 0
 
 
@@ -85,7 +88,10 @@ def addNodes(research):
 
         newTweet = node_relationship_merge(graph, transaction,
                                            newUser, "Tweet", "HAS_TWEETED", tweetId=str(tweet["id"]),
-                                           text=tweet["text"], source=tweet["source"])
+                                           text=tweet["text"])
+
+        node_relationship_merge(graph,transaction,newTweet,"Source","VIA",source=tweet["source"])
+
         if str(tweet["geo"]) != 'None' and str(tweet["place"] != 'None'):
             del tweet["place"]["bounding_box"]
             del tweet["place"]["attributes"]
@@ -112,6 +118,8 @@ def addNodes(research):
     research.numberOfNodes = nodeCount
     research.save()
     nodeCount = 0
+"""
+
 
 
 def results(request, research_id):
@@ -135,29 +143,6 @@ def getAlpha2Countries(locations):
             countries.append(loc.raw['address']['country_code'].upper())
     return countries
 
-
-def countryNameCleaner(countries):
-    countriescleaned = []
-    for country in countries:
-        if country == 'Brasil':
-            countriescleaned.append('Brazil')
-        elif country == 'Italia':
-            countriescleaned.append('Italy')
-        elif country == 'UK':
-            countriescleaned.append('United Kingdom')
-        elif country == 'España':
-            countriescleaned.append('Spain')
-        elif country == 'مصر':
-            countriescleaned.append('Egypt')
-        elif country == 'العراق':
-            countriescleaned.append('Iraq')
-        elif country == 'السعودية':
-            countriescleaned.append('SAU')
-        elif country == 'عمان':
-            countriescleaned.append('Oman')
-        else:
-            countriescleaned.append(country)
-    return countriescleaned
 
 
 def getAlpha3Country(alpha2Countries):
@@ -226,6 +211,6 @@ def mapping(request, research_id):
 def visualization(request, research_id):
     if not research_id:
         raise Http404
-    research = R.getResearchById(research_id)
-    addNodes(research)
+    creator = nodesRelationshipsCreator()
+    creator.addNodes(research_id)
     return render(request, 'template1/visualization.html', locals())

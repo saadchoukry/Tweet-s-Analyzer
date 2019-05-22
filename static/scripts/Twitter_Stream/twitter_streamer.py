@@ -3,10 +3,10 @@ import time
 from sys import argv
 
 # Authentification
-from .authentification import TwitterAuth
+from authentification import TwitterAuth
 
 # Json Parsing
-from .JsonParser import jsonParser, jsonParser2
+from JsonParser import jsonParser, jsonParser2
 
 # Twitter Client
 from tweepy import StreamListener
