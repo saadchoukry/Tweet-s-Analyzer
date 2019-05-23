@@ -20,18 +20,29 @@ def search(request):
     if request.method == "POST":
         if "streamingDuration" in request.POST:
             post = streamSearch(request)
-            return redirect(resultsViews.results, post.researchId)
+            if str(type(post)) == "<class 'django.http.response.HttpResponse'>":
+                return post
+            else:
+                return redirect(resultsViews.results, post.researchId)
+
         elif "screen" in request.POST:
             post = screenNameSearch(request)
-            return redirect(resultsViews.results, post.researchId)
+            if str(type(post)) == "<class 'django.http.response.HttpResponse'>":
+                return post
+            else:
+                return redirect(resultsViews.results, post.researchId)
         elif "tag" in request.POST:
             post = tagSearch(request)
-            return redirect(resultsViews.results, post.researchId)
-        elif ("keywords" in request.POST) and ("count" in request.POST):
+            if str(type(post)) == "<class 'django.http.response.HttpResponse'>":
+                return post
+            else:
+                return redirect(resultsViews.results, post.researchId)
+        elif ("keywords1" in request.POST) and ("count" in request.POST):
             post = keySearch(request)
-            return redirect(resultsViews.results, post.researchId)
-        return render(request, 'template1/researchType.html')
-
+            if str(type(post)) == "<class 'django.http.response.HttpResponse'>":
+                return post
+            else:
+                return redirect(resultsViews.results, post.researchId)
     else:
         return render(request, 'template1/researchType.html', locals())
 
@@ -50,11 +61,13 @@ def streamSearch(request):
             .format(post.researchId)
         post.save()
         return post
+    else:
+        return render(request,'template1/researchType.html',{'form0':form})
+
 
 
 def screenNameSearch(request):
     form = byScreenNameForm(request.POST)
-    print(form)
     if form.is_valid():
         post = form.save(commit=False)
         post.researchType = researchType.objects.get(type='OffStream')
@@ -65,6 +78,8 @@ def screenNameSearch(request):
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
+    else:
+        return render(request,'template1/researchType.html',{'form':form})
 
 
 def tagSearch(request):
@@ -79,20 +94,25 @@ def tagSearch(request):
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
+    else:
+        return render(request,'template1/researchType.html',{'form':form})
 
 
 def keySearch(request):
     form = byKeywordsForm(request.POST)
+    print(form)
     if form.is_valid():
         post = form.save(commit=False)
         post.researchType = researchType.objects.get(type='OffStream')
         post = form.save()
-        ByKeyWord.main(request.POST["count"], request.POST["since"], request.POST["keywords"], post.researchId)
+        ByKeyWord.main(request.POST["count"], request.POST["since"], request.POST["keywords1"], post.researchId)
         post.numberOfTweets = request.POST["count"]
         # post.ratio = float(post.numberOfTweets) / float(post.streamingDuration)
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
+    else:
+        return render(request,'template1/researchType.html',{'form':form})
 
 
 def previous(request):

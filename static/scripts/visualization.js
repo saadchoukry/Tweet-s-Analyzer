@@ -9,7 +9,6 @@
 		viz.render();
 	}
 
-
 	function initVizFrame() {
     		var config = {
 		    container_id:"mainDiv",
@@ -20,22 +19,6 @@
 		};
     		return new NeoVis.default(config);
     }
-	/*
-	function getNodeLabels(Viz) {
-        var nodeLabels = Viz.renderWithCypher("CALL db.labels()");
-        if(nodeLabels == undefined) {
-        	console.log("No record exists");
-		}else {
-        	nodeLabels = nodeLabels.slice(1);
-		nodeLabels.forEach(function (e) {
-			var json = JSON.stringify(e);
-			console.log(json.length);
-
-        });
-        //return nodeLabels;
-		}
-    }
-	*/
 
 	function stabilize(viz) {
 	    viz.stabilize();
@@ -55,6 +38,5 @@
 		stop.addEventListener('click',function () {
 			stabilize(viz);
 		})
-
 
     });

@@ -54,8 +54,8 @@ class research(models.Model):
 
 
 class streamingResearch(research):
-    keywords = models.TextField(max_length=100)
-    streamingDuration = models.IntegerField(default=5, validators=[MaxValueValidator(30)])
+    keywords = models.TextField(max_length=100,blank=True)
+    streamingDuration = models.IntegerField(default=5,blank=True)
 
     @staticmethod
     class Meta:
@@ -71,14 +71,14 @@ class streamingResearch(research):
 
 
 class offStreamResearch(research):
-    since = models.DateField(default=timezone.now())
-    count = models.IntegerField(default=0)
+    since = models.DateField(default=timezone.now(),blank=True)
+    count = models.IntegerField(default=0,blank=True)
 
 
 
 
 class ByScreenName(offStreamResearch):
-    screen = models.TextField(default=" ", max_length=100)
+    screen = models.TextField(default=" ", max_length=100,blank=True)
 
     class Meta:
         verbose_name = "Research by screen name"
@@ -89,7 +89,7 @@ class ByScreenName(offStreamResearch):
 
 
 class ByHashtags(offStreamResearch):
-    tag = models.TextField(default="", max_length=100)
+    tag = models.TextField(default="", max_length=100,blank=True)
 
     class Meta:
         verbose_name = "Research by hashtags"
@@ -100,14 +100,14 @@ class ByHashtags(offStreamResearch):
 
 
 class ByKeywords(offStreamResearch):
-    keywords = models.TextField(default="", max_length=100)
+    keywords1 = models.TextField(default="", max_length=100,blank=True)
 
     class Meta:
         verbose_name = "Research by keywords"
         verbose_name_plural = "Researches by keywords"
 
     def __str__(self):
-        return self.keywords + "  " + str(self.researchDate)
+        return self.keywords1 + "  " + str(self.researchDate)
 
 
 class stats:
