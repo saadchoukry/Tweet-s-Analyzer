@@ -9,7 +9,6 @@ from JsonParser import StringToArray
 from results import views as resultsViews
 import ByKeyWord
 
-
 def home(request):
     return render(request, 'template1/homePage.html',
                   {'rn': stats.getNumberOfResearches(), 'tn': stats.getNumberOfTweets(),

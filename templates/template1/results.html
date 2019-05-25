@@ -5,7 +5,12 @@ Results
 
 
 {% block recap %}
-    <div  class="section type-2" style="padding-bottom: 0;padding-top: 50px;">
+     <link rel="stylesheet" href="../../static/css/disabledbutton.css">
+
+    <div class="align-self-end text-center mt-5" id="testgif1" >
+
+    </div>
+    <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 50px;">
         <div class="section-headlines" style="padding-top: 0">
             <h4>Recap</h4>
         </div>
@@ -20,7 +25,7 @@ Results
                 <div class="col-lg-4 text-center">
                     <div class="border rounded p-3 m-0  list-group-item-action">
                         <i class="fas fa-search h1"></i><br>
-                        {{ research.keywords }}
+                        Keywords: {{ keywords }}
                     </div>
                 </div>
                 <div class="col-lg-4 text-center">
@@ -41,7 +46,7 @@ Results
                 <div class="col-lg-4 text-center">
                     <div class="border rounded p-3 m-0  list-group-item-action">
                         <i class="fas fa-stopwatch h1"></i> <br>
-                        {{ research.streamingDuration }} seconds
+                        {{ streamingDuration }} seconds
                     </div>
                 </div>
                 <div class="col-lg-4 text-center">
@@ -54,18 +59,33 @@ Results
         </div>
     </div>
     <br class="gap-70">
-    <div class="row">
+
+
+    <div class="row" id="ToDisable2">
         <div class="" style="margin: auto;">
             <a href="{% url 'visualization' research.researchId %}">
-                <button  class="btn btn-primary" style="width: 170px;height:50px;">Visualization</button>
+                <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-eye"></i>  Visualization</button>
             </a>
 
             <a href="{% url 'mapping' research.researchId %}" >
-                <button  class="btn btn-primary" style="width: 170px;height:50px;">Mapping</button>
+                <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-map "></i>  Mapping</button>
             </a>
         </div>
     </div>
+
     <br class="gap-70">
+
+
+    <script src="../../static/scripts/researchType.js"></script>
+    <script>
+        $(function() {
+        $('.actiongif').click(function() {
+            clearBox("ToDisable1");
+            clearBox("ToDisable2");
+            $('#testgif1').html('<img  src="../../static/images/Blocks-2.9s-200px.gif">');
+        });
+      });
+    </script>
 {% endblock %}
 
 

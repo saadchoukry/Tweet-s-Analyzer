@@ -47,6 +47,20 @@ class research(models.Model):
         researchByHashtags = ByHashtags.objects.get(researchId=self.researchId)
         return researchByHashtags.screenName
 
+    @property
+    def getStreamingDuration(self):
+        streamSearch = streamingResearch.objects.get(researchId=self.researchId)
+        return streamSearch.streamingDuration
+
+    @property
+    def getSince(self):
+        offstrSearch = offStreamResearch.objects.get(researchId=self.researchId)
+        return offstrSearch.since
+
+    def getCount(self):
+        offstrSearch = offStreamResearch.objects.get(researchId=self.researchId)
+        return offstrSearch.count
+
     class Meta:
         verbose_name = "Research"
         verbose_name_plural = "Researches"

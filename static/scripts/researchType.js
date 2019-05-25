@@ -1,42 +1,36 @@
- function clearBox(elementID) {
+var ofstr_button = document.getElementsByClassName("actiongif");
+
+function clearBox(elementID) {
         document.getElementById(elementID).innerHTML = "";
         }
 
 function getByScreenName() {
-
     clearBox("formDiv");
-    var count=document.createElement("input");
-    var since=document.createElement("input");
-    var screen=document.createElement("input");
-    var submit=document.createElement("button");
-    count.setAttribute("type","number");
-    count.setAttribute("class","form-control");
-    count.setAttribute("id","count");
-    count.setAttribute("name","count");
-    since.setAttribute("type","Date");
-    since.setAttribute("class","form-control");
-    since.setAttribute("id","since");
-    since.setAttribute("name","since");
-    screen.setAttribute("type","text");
-    screen.setAttribute("class","form-control");
-    screen.setAttribute("id","screen");
-    screen.setAttribute("name","screen");
-    submit.setAttribute("class","btn btn-primary");
-    submit.setAttribute("type","submit")
-    submit.innerText="Search";
-    var countLabel=document.createElement("label");
-    countLabel.setAttribute("for","count");
-    countLabel.innerText="Tweets limit:";
-    var screenLabel=document.createElement("label");
-    screenLabel.setAttribute("for","screen");
-    screenLabel.innerText="Screen name:";
-    var sinceLabel=document.createElement("label");
-    sinceLabel.setAttribute("for","since");
-    sinceLabel.innerText="Since:";
-
-
+    var count = document.createElement("input");
+    var since = document.createElement("input");
+    var screen = document.createElement("input");
+    count.setAttribute("type", "number");
+    count.setAttribute("class", "form-control");
+    count.setAttribute("id", "count");
+    count.setAttribute("name", "count");
+    since.setAttribute("type", "Date");
+    since.setAttribute("class", "form-control");
+    since.setAttribute("id", "since");
+    since.setAttribute("name", "since");
+    screen.setAttribute("type", "text");
+    screen.setAttribute("class", "form-control");
+    screen.setAttribute("id", "screen");
+    screen.setAttribute("name", "screen");
+    var countLabel = document.createElement("label");
+    countLabel.setAttribute("for", "count");
+    countLabel.innerText = "Tweets limit:";
+    var screenLabel = document.createElement("label");
+    screenLabel.setAttribute("for", "screen");
+    screenLabel.innerText = "Screen name:";
+    var sinceLabel = document.createElement("label");
+    sinceLabel.setAttribute("for", "since");
+    sinceLabel.innerText = "Since:";
     var form=document.getElementById("formDiv");
-
     form.appendChild(document.createElement("br"));
     form.appendChild(screenLabel);
     form.appendChild(screen);
@@ -46,21 +40,17 @@ function getByScreenName() {
     form.appendChild(document.createElement("br"));
     form.appendChild(countLabel);
     form.appendChild(count);
-
     form.appendChild(document.createElement("br"));
-    form.appendChild(submit);
     form.appendChild(document.createElement("br"));
 }
 
 
-var selection = document.getElementById("offstr_type");
 
 function getByHashTag() {
     clearBox("formDiv");
     var count=document.createElement("input");
     var since=document.createElement("input");
     var tag=document.createElement("input");
-    var submit=document.createElement("button");
     count.setAttribute("type","number");
     count.setAttribute("class","form-control");
     count.setAttribute("id","count");
@@ -73,9 +63,6 @@ function getByHashTag() {
     tag.setAttribute("class","form-control");
     tag.setAttribute("id","tag");
     tag.setAttribute("name","tag");
-    submit.setAttribute("class","btn btn-primary");
-    submit.setAttribute("type","submit")
-    submit.innerText="Search";
     var countLabel=document.createElement("label");
     countLabel.setAttribute("for","count");
     countLabel.innerText="Tweets limit:";
@@ -85,10 +72,7 @@ function getByHashTag() {
     var sinceLabel=document.createElement("label");
     sinceLabel.setAttribute("for","since");
     sinceLabel.innerText="Since:";
-
-
     var form=document.getElementById("formDiv");
-
     form.appendChild(document.createElement("br"));
     form.appendChild(tagLabel);
     form.appendChild(tag);
@@ -98,9 +82,7 @@ function getByHashTag() {
     form.appendChild(document.createElement("br"));
     form.appendChild(countLabel);
     form.appendChild(count);
-
     form.appendChild(document.createElement("br"));
-    form.appendChild(submit);
     form.appendChild(document.createElement("br"));
 }
 
@@ -109,7 +91,6 @@ function getByKeyWords() {
     var count=document.createElement("input");
     var since=document.createElement("input");
     var keywords=document.createElement("input");
-    var submit=document.createElement("button");
     count.setAttribute("type","number");
     count.setAttribute("class","form-control");
     count.setAttribute("id","count");
@@ -122,9 +103,6 @@ function getByKeyWords() {
     keywords.setAttribute("class","form-control");
     keywords.setAttribute("id","keywords1");
     keywords.setAttribute("name","keywords1");
-    submit.setAttribute("class","btn btn-primary");
-    submit.setAttribute("type","submit")
-    submit.innerText="Search";
     var countLabel=document.createElement("label");
     countLabel.setAttribute("for","count");
     countLabel.innerText="Tweets limit:";
@@ -134,8 +112,6 @@ function getByKeyWords() {
     var sinceLabel=document.createElement("label");
     sinceLabel.setAttribute("for","since");
     sinceLabel.innerText="Since:";
-
-
     var form=document.getElementById("formDiv");
     form.appendChild(document.createElement("br"));
     form.appendChild(keyLabel);
@@ -146,8 +122,6 @@ function getByKeyWords() {
     form.appendChild(document.createElement("br"));
     form.appendChild(countLabel);
     form.appendChild(count);
-
     form.appendChild(document.createElement("br"));
-    form.appendChild(submit);
     form.appendChild(document.createElement("br"));
 }

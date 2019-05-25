@@ -11,8 +11,14 @@ from nodesRelationshipsCreator import nodesRelationshipsCreator
 def results(request, research_id):
     if not research_id:
         raise Http404
-
     research = R.getResearchById(research_id)
+    if research.researchType.type == 'Stream':
+        keywords = research.getKeywords
+        streamingDuration = research.getStreamingDuration
+    else:
+        since = research.getSince
+        count = research.getCount
+    print(locals())
     return render(request, 'template1/results.html', locals())
 # RESULTS [END]
 

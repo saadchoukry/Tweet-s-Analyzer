@@ -4,7 +4,6 @@ Author: Frittt.com using Bootstrap 3
 */
 
 
-
 .row-merge {
   width: 100%;
   *zoom: 1;
@@ -422,6 +421,7 @@ label {
 }
 .section.type-2 {
   background: #fff;
+
 }
 .section.type-3 {
   background: #f0f2f4;

@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block tweets_search %}
-    <div class="section type-2" style="padding-bottom: 100px; padding-top: 71px;">
-        <div class="container">
+    <link rel="stylesheet" href="../../static/css/disabledbutton.css">
+
+    <div  class="section type-2" style="padding-bottom: 100px; padding-top: 71px;">
+        <div class="container-fluid">
             <div class="row d-flex">
-                <div class="col-4 mr-auto">
+                <div  class="col-lg-4 offset-lg-1 Todisable">
                     <div class="section type-2" style="padding-bottom: 0; padding-top: 0;" >
                         <div style="margin: auto;" class="container" >
                             <div  class="section-headlines">
@@ -40,11 +42,17 @@
                                 {% endfor %}
                             {% endif %}
 
-                            <button type="submit" href="{% url 'search' %}" style="width:150px;height:40px ;margin: auto;" class="btn btn-primary ">Search</button>
+                            <button type="submit"  href="{% url 'search' %}" style="width:150px;height:40px ;" class="btn btn-primary actiongif">Search</button>
                     </form>
                 </div>
 
-                <div class="col-4 ml-auto">
+                {% if form0.errors or form.errors%}
+                {% else %}
+                    <div class="col-lg-1 testgif" style="margin-top: 80px;"></div>
+                {% endif %}
+
+
+                <div class="col-lg-4 offset-lg-1 Todisable">
                     <div class="section type-12" style="padding-bottom: 0;padding-top: 0;" >
                         <div style="margin: auto;" class="container" >
                             <div  class="section-headlines">
@@ -52,6 +60,7 @@
                             </div>
                         </div>
                     </div>
+
                     <select id="offstr_type" class="form-control form-control-lg" name="off_stream_select_box">
                         <option id="def" selected>Choose wisely</option>
                         <option id="screen_name" value="screen_name" >By screen name</option>
@@ -59,53 +68,62 @@
                         <option id="keywords1" value="keywords">By keywords</option>
                     </select><br>
 
-
-
                     <form action="{% url 'search' %}" class="form" method="post" id="off_stream">
                         {% csrf_token %}
-
-                        <div id="formDiv">
+                        <div class="mt-0" id="formDiv">
                         {% if form.errors %}
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <div class="alert alert-danger">
-                                    <i class="fas fa-exclamation"></i>
-                                    <strong>  {{ error|escape}}</strong>
-                                </div>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <i class="fas fa-exclamation"></i>
+                                        <strong>  {{ error|escape}}</strong>
+                                    </div>
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
-                    {% endif %}
+                        {% endif %}
+
                         </div>
+                        <button class="btn btn-primary actiongif" type="submit"
+                                    style="display:none;width:150px;height:40px ;"> Search
+                        </button>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </div>
 
 
-    <script src="../../static/scripts/researchType.js"></script>
-    <script>
+<script src="../../static/scripts/researchType.js"></script>
+<script>
+var selection = document.getElementById("offstr_type");
+selection.addEventListener('change',function () {
+    if (document.getElementById("screen_name").selected === true) {
+        getByScreenName();
+        document.getElementsByClassName("actiongif")[1].style.display='block';
+    }
+    if (document.getElementById("hashtag").selected === true) {
+        getByHashTag();
+        document.getElementsByClassName("actiongif")[1].style.display='block';
 
-        selection.addEventListener('change',function () {
-            if (document.getElementById("screen_name").selected === true)
-                getByScreenName();
-            else if (document.getElementById("hashtag").selected === true)
-                getByHashTag();
-            else if (document.getElementById("keywords1").selected === true)
-                getByKeyWords();
-            else
-                clearBox("formDiv");
+    }
+    if (document.getElementById("keywords1").selected === true) {
+        getByKeyWords();
+        document.getElementsByClassName("actiongif")[1].style.display='block';
+    }
+    if (document.getElementById("def").selected === true) {
+        clearBox("formDiv");
+        document.getElementsByClassName("actiongif")[1].style.display='none';
+
+    }
+});
+
+$(function() {
+    $('.actiongif').click(function() {
+        $('.testgif').html('<img src="../../static/images/Blocks-2.9s-200px.gif">');
+        $('.Todisable').addClass("disabledbutton");
         });
-    </script>
-
-
-
-
-
-
-
+    });
+</script>
 {% endblock %}
 
 

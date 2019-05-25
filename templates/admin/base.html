@@ -1,0 +1,117 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<!-- Stylesheets -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" type="text/css">
+<!--<link type="text/css" href="../../static/bootstrap/css/bootstrap.css" rel="stylesheet">-->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500italic,500,300italic,300' rel='stylesheet' type='text/css'>
+<link type="text/css" href="../../static/icons/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link type="text/css" href="../../static/icons/rondo/style.css" rel="stylesheet">
+<link type="text/css" href="../../static/css/theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link  rel="icon" href="../../static/images/logo3.png">
+<link rel="stylesheet" type="text/css" href="{% static "admin/styles/css/base.css" %}">
+
+{% block extrastyle %}{% endblock %}
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}">{% endif %}
+{% block extrahead %}{% endblock %}
+{% block responsive %}
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive.css" %}">
+    {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% static "admin/css/responsive_rtl.css" %}">{% endif %}
+{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+  data-admin-utc-offset="{% now "Z" %}">
+
+<nav class="navbar navbar-expand-lg navbar-light"  role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img style="width: 150px; height: 45px;" src="../../static/images/Tweets_analyzer.png" alt="" />
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse hidden-xs " style="margin: auto;margin-left: 450px;" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"  >
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="{% url 'search' %}">Search for tweets</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="{% url 'PreviousResearches' %}">Previous researchs</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="{% url 'home' %}#team">Our Team</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-dark" href="{% url 'admin:index' %}">Admin section</a>
+                </li>
+            </ul>
+      </div>
+    </div>
+</nav>
+<!-- END Header -->
+
+<!-- Container -->
+<div class="container">
+
+    {% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">Tweet's Analyzer [Admin]</a>
+    {% if title %} &rsaquo; {{ title }}{% endif %}
+    </div>
+    {% endblock %}
+
+    {% block messages %}
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+        {% endfor %}</ul>
+        {% endif %}
+    {% endblock messages %}
+
+ {% block content_title %}
+                <div class="section-headlines" style="margin-bottom: 5px;">
+                    <h4 style="font-size:xx-large">Admin section</h4>
+                </div>
+ {% endblock %}
+    <!-- Content -->
+    <div id="content" class="row offset-1">
+        {% block pretitle %}{% endblock %}
+        {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}
+        <footer class="footer">
+            <div class="container">
+                <div class="row ">
+                    <div class="mx-auto" style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid</div>
+            </div>
+            </div>
+        </footer>
+    {% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+</html>
