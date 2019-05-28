@@ -86,8 +86,10 @@ class nodesRelationshipsCreator:
 
     def getCurrentNodeLabels(self):
         schema = Schema(self.graph)
-        return schema.node_labels
+        return schema.node_labels,len(schema.node_labels)
 
     def getCurrentRelationshipsLabels(self):
         schema = Schema(self.graph)
-        return schema.relationship_types
+        return schema.relationship_types,len(schema.relationship_types)
+
+

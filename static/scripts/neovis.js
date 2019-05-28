@@ -36667,7 +36667,7 @@ class NeoVis {
     clearNetwork() {
         this._nodes = {}
         this._edges = {};
-        this._network.setData([]);
+        //this._network.setData([]);
     }
 
 
