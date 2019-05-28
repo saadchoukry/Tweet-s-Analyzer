@@ -9,6 +9,7 @@ from JsonParser import StringToArray
 from results import views as resultsViews
 import ByKeyWord
 
+
 def home(request):
     return render(request, 'template1/homePage.html',
                   {'rn': stats.getNumberOfResearches(), 'tn': stats.getNumberOfTweets(),
@@ -61,8 +62,7 @@ def streamSearch(request):
         post.save()
         return post
     else:
-        return render(request,'template1/researchType.html',{'form0':form})
-
+        return render(request, 'template1/researchType.html', {'form0': form})
 
 
 def screenNameSearch(request):
@@ -78,7 +78,7 @@ def screenNameSearch(request):
         post.save()
         return post
     else:
-        return render(request,'template1/researchType.html',{'form':form})
+        return render(request, 'template1/researchType.html', {'form': form})
 
 
 def tagSearch(request):
@@ -94,7 +94,7 @@ def tagSearch(request):
         post.save()
         return post
     else:
-        return render(request,'template1/researchType.html',{'form':form})
+        return render(request, 'template1/researchType.html', {'form': form})
 
 
 def keySearch(request):
@@ -111,7 +111,7 @@ def keySearch(request):
         post.save()
         return post
     else:
-        return render(request,'template1/researchType.html',{'form':form})
+        return render(request, 'template1/researchType.html', {'form': form})
 
 
 def previous(request):

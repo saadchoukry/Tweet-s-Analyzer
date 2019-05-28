@@ -1,9 +1,11 @@
 import py2neo
-from py2neo import Node, Relationship,Graph,NodeMatcher
+from py2neo import Node, Relationship, Graph, NodeMatcher
 
 from neo4jAuth import neo4jAuth
 from JsonParser import get_json
 from search.models import research as R
+from py2neo.database import Schema
+
 
 class nodesRelationshipsCreator:
 
@@ -39,7 +41,7 @@ class nodesRelationshipsCreator:
             self.transaction.create(RELATIONSHIP)
             return nodeMatch
 
-    def addNodes(self,research_id):
+    def addNodes(self, research_id):
         self.delete_all_nodes()
         self.res = R.getResearchById(research_id)
         for tweet in get_json(self.res):
@@ -49,14 +51,14 @@ class nodesRelationshipsCreator:
             newUser.__primarykey__ = "screen_name"
             newUser.__primarylabel__ = "User"
             self.graph.merge(newUser)
-            #self.transaction.create(newUser)
+            # self.transaction.create(newUser)
             self.nodeCount += 1
             self.node_relationship_merge(newUser, "Language", "TALKS", language=tweet["user"]["lang"])
             if str(tweet["user"]["location"]) != "None":
                 self.node_relationship_merge(newUser, "Location", "IS_FROM", location=tweet["user"]["location"])
 
             newTweet = self.node_relationship_merge(newUser, "Tweet", "HAS_TWEETED", tweetId=str(tweet["id"]),
-                                               text=tweet["text"])
+                                                    text=tweet["text"])
 
             self.node_relationship_merge(newTweet, "Source", "VIA", source=tweet["source"])
 
@@ -64,8 +66,8 @@ class nodesRelationshipsCreator:
                 del tweet["place"]["bounding_box"]
                 del tweet["place"]["attributes"]
                 self.node_relationship_merge(newTweet, "Location", "IS_POSTED_FROM",
-                                        locationId=tweet["geo"]["coordinates"],
-                                        tweetPlace=tweet["place"]["name"])
+                                             locationId=tweet["geo"]["coordinates"],
+                                             tweetPlace=tweet["place"]["name"])
 
             for tag in tweet["entities"]["hashtags"]:
                 self.node_relationship_merge(newTweet, "Hashtag", "HAS_TAG", hashtag=tag["text"])
@@ -75,10 +77,17 @@ class nodesRelationshipsCreator:
 
             if "retweeted_status" in tweet:
                 self.node_relationship_merge(newTweet, "Tweet", "HAS_RETWEETED",
-                                        tweetId=tweet["retweeted_status"]["id_str"],
-                                        text=tweet["retweeted_status"]["text"],
-                                        source=tweet["retweeted_status"]["source"])
+                                             tweetId=tweet["retweeted_status"]["id_str"],
+                                             text=tweet["retweeted_status"]["text"],
+                                             source=tweet["retweeted_status"]["source"])
             self.transaction = self.commit_changes()
         self.res.numberOfNodes = self.nodeCount
         self.res.save()
 
+    def getCurrentNodeLabels(self):
+        schema = Schema(self.graph)
+        return schema.node_labels
+
+    def getCurrentRelationshipsLabels(self):
+        schema = Schema(self.graph)
+        return schema.relationship_types

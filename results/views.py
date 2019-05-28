@@ -42,5 +42,7 @@ def visualization(request, research_id):
         raise Http404
     creator = nodesRelationshipsCreator()
     creator.addNodes(research_id)
+    nodeLabels = creator.getCurrentNodeLabels()
+    relationshipLabels = creator.getCurrentRelationshipsLabels()
     return render(request, 'template1/visualization.html', locals())
 # VISUALISATION [END]
