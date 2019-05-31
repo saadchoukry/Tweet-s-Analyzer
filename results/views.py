@@ -19,7 +19,7 @@ def results(request, research_id):
         since = research.getSince
         count = research.getCount
     else:
-        print("UPLOAD !! ")
+        pass
     return render(request, 'template1/results.html', locals())
 
 

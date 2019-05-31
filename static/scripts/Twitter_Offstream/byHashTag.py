@@ -18,6 +18,7 @@ class getTweetsByHashTags:
         self.hashTags = hashTags
         self.count = count
         self.since = since
+        self.tweetsCounter = 0
         self.file = open('static/collected_data/results_{}.json'.format(researchId), 'w')
 
 
@@ -31,7 +32,7 @@ class getTweetsByHashTags:
         api = API(self.authentification)
         for tweet in Cursor(api.search,q=self.hashTags, since=self.since).items(int(self.count)):
             tweets.append(json.dumps(tweet._json))
-
+            self.tweetsCounter += 1
         new_data = "[" + ",".join(tweets) + "]"
         self.file.write(new_data)
 
@@ -39,5 +40,6 @@ class getTweetsByHashTags:
 def main(count, since,hashtags , researchId):
     getTweets = getTweetsByHashTags(count, since,hashtags,researchId)
     getTweets.getTweets()
+    return getTweets.tweetsCounter
 
 

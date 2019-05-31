@@ -14,16 +14,27 @@
                         <h5 class="mb-1">
                             {{ research.researchDate }}
                         </h5>
+                        {% if research.researchType.type == "Upload" %}
+                        {{ research.numberOfTweets }} tweets uploaded
+                        {% else %}
                         <small>{{ research.numberOfTweets }} tweets collected </small>
+                        {% endif %}
                     </div>
 
                 <p class="mb-1">
-
-                    {% if research.researchType.type == 'Stream'  %}
-                        keywords : '{{ research.getKeywords }}'
-                    {% elif research.researchType.type == 'OffStream' %}
-                        screen name :
+                {% if research.researchType.type == "Stream" %}
+                    Keywords: {{ research.getKeywords }}
+                {% elif research.researchType.type == "OffStream" %}
+                    {% if research.getKeywords2 %}
+                        Keywords: {{ research.getKeywords2 }}
+                    {% elif research.getScreenName %}
+                        Screen name: {{ research.getScreenName }}
+                    {% else %}
+                        Hashtag: {{ research.getHashtags }}
                     {% endif %}
+                {% else %}
+                    Description : {{ research.getDescription }}
+                {% endif %}
 
                 </p>
                     <small>Type : {{ research.researchType.type }}</small>

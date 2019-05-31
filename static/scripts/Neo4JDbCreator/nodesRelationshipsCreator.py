@@ -18,6 +18,7 @@ class nodesRelationshipsCreator:
         self.transaction = self.graph.begin()
         self.nodeCount = 0
         self.res = None
+        self.tweetsCounter = 0
 
     def delete_all_nodes(self):
         self.graph.delete_all()
@@ -63,8 +64,8 @@ class nodesRelationshipsCreator:
         self.delete_all_nodes()
         self.res = R.getResearchById(research_id)
         for tweet in get_json(self.res):
+            self.tweetsCounter += 1
             if "user" in tweet:
-                print('user')
                 if "entities" in (tweet["user"]):
                     del tweet["user"]["entities"]
                 newUser = self.user_merge(tweet["user"]["screen_name"], **tweet["user"])
@@ -97,6 +98,7 @@ class nodesRelationshipsCreator:
                                                  source=tweet["retweeted_status"]["source"])
             self.transaction = self.commit_changes()
         self.res.numberOfNodes = self.nodeCount
+        self.res.numberOfTweets = self.tweetsCounter
         self.res.save()
 
     def getCurrentNodeLabels(self):

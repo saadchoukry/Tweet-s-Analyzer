@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class researchType(models.Model):
-    researchTypes = (('Stream', 'Stream'), ('OffStream', 'OffStream'),('Upload','Upload'))
+    researchTypes = (('Stream', 'Stream'), ('OffStream', 'OffStream'), ('Upload', 'Upload'))
     type = models.CharField(default='Stream', choices=researchTypes, max_length=10)
 
     class Meta:
@@ -12,9 +12,6 @@ class researchType(models.Model):
 
     def __str__(self):
         return 'Type : {}'.format(self.type)
-
-
-
 
 
 class research(models.Model):
@@ -25,6 +22,7 @@ class research(models.Model):
     ratio = models.IntegerField(default=0)
     resultsFileName = models.TextField(default='static/collected_data/default.json')
     numberOfNodes = models.IntegerField(default=0)
+    executionDuration = models.FloatField(default=0)
 
     @staticmethod
     def getResearchById(id):
@@ -38,17 +36,17 @@ class research(models.Model):
     @property
     def getScreenName(self):
         researchByScreenName = ByScreenName.objects.get(researchId=self.researchId)
-        return researchByScreenName.screenName
+        return researchByScreenName.screen
 
     @property
     def getKeywords2(self):
         researchByKeywords = ByKeywords.objects.get(researchId=self.researchId)
-        return researchByKeywords.keywords
+        return researchByKeywords.keywords1
 
     @property
     def getHashtags(self):
         researchByHashtags = ByHashtags.objects.get(researchId=self.researchId)
-        return researchByHashtags.screenName
+        return researchByHashtags.tag
 
     @property
     def getStreamingDuration(self):
@@ -64,20 +62,24 @@ class research(models.Model):
         offstrSearch = offStreamResearch.objects.get(researchId=self.researchId)
         return offstrSearch.count
 
+    def getDescription(self):
+        upload = uploadedTweets.objects.get(researchId=self.researchId)
+        return upload.description
+
     class Meta:
         verbose_name = "Research"
         verbose_name_plural = "Researches"
         ordering = ["researchDate"]
 
+
 class uploadedTweets(research):
-    jsonFile = models.FileField(upload_to='static/uploaded_data/', max_length=100,default='')
+    jsonFile = models.FileField(upload_to='static/uploaded_data/', max_length=100, default='')
     description = models.TextField(default='')
 
 
-
 class streamingResearch(research):
-    keywords = models.TextField(max_length=100,blank=True)
-    streamingDuration = models.IntegerField(default=5,blank=True)
+    keywords = models.TextField(max_length=100, blank=True)
+    streamingDuration = models.IntegerField(default=5, blank=True)
 
     @staticmethod
     class Meta:
@@ -91,12 +93,14 @@ class streamingResearch(research):
     def getResearchById(id):
         return streamingResearch.objects.get(researchId=id)
 
+
 class offStreamResearch(research):
-    since = models.DateField(default=timezone.now(),blank=True)
-    count = models.IntegerField(default=0,blank=True)
+    since = models.DateField(default=timezone.now(), blank=True)
+    count = models.IntegerField(default=0, blank=True)
+
 
 class ByScreenName(offStreamResearch):
-    screen = models.TextField(default=" ", max_length=100,blank=True)
+    screen = models.TextField(default=" ", max_length=100, blank=True)
 
     class Meta:
         verbose_name = "Research by screen name"
@@ -105,8 +109,9 @@ class ByScreenName(offStreamResearch):
     def __str__(self):
         return self.screen + "  " + str(self.researchDate)
 
+
 class ByHashtags(offStreamResearch):
-    tag = models.TextField(default="", max_length=100,blank=True)
+    tag = models.TextField(default="", max_length=100, blank=True)
 
     class Meta:
         verbose_name = "Research by hashtags"
@@ -115,8 +120,9 @@ class ByHashtags(offStreamResearch):
     def __str__(self):
         return self.tag + "  " + str(self.researchDate)
 
+
 class ByKeywords(offStreamResearch):
-    keywords1 = models.TextField(default="", max_length=100,blank=True)
+    keywords1 = models.TextField(default="", max_length=100, blank=True)
 
     class Meta:
         verbose_name = "Research by keywords"
@@ -124,8 +130,6 @@ class ByKeywords(offStreamResearch):
 
     def __str__(self):
         return self.keywords1 + "  " + str(self.researchDate)
-
-
 
 
 class stats:

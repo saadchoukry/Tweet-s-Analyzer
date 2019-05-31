@@ -64,7 +64,6 @@ def jsonParser(keywords):
         singlefile = open(fileName, 'w+')
         json.dump(singleTweet, singlefile)
         tweets_counter = data_json.index(singleTweet)
-    print("{0} Tweets added .".format(str(tweets_counter - 1)))
     return tweets_counter
 
 

@@ -64,7 +64,7 @@ class byScreenNameForm(forms.ModelForm):
                 'The limit number of tweets must be set .'
             ])
 
-        if screen == "" :
+        if screen == "":
             self._errors['screen'] = self.error_class([
                 'Please enter your chosen screen name'])
 
@@ -160,7 +160,23 @@ class byKeywordsForm(forms.ModelForm):
                 'Since Date must be set .'])
         return self.cleaned_data
 
+
 class uploadForm(forms.ModelForm):
     class Meta:
         model = uploadedTweets
-        fields = ['jsonFile','description']
+        fields = ['jsonFile', 'description']
+
+    def clean(self):
+        super(uploadForm, self).clean()
+        jsonFile = self.cleaned_data.get('jsonFile')
+        description = self.cleaned_data.get('description')
+
+        if jsonFile is None:
+            self.errors['jsonFile'] = self.error_class([
+                'You must include a json file .'
+            ])
+
+        if description is None:
+            self.errors['description'] = self.error_class([
+                'A description is needed .'])
+        return self.cleaned_data

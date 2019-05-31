@@ -20,13 +20,29 @@
                 <div class="col-lg-4 text-center">
                     <div class="border rounded p-3 m-0  list-group-item-action">
                         <i class="fas fa-search h1"></i><br>
-                        Keywords: {{ keywords }}
+                        {% if research.researchType.type == "Stream" %}
+                            Keywords: {{ research.getKeywords }}
+                        {% elif research.researchType.type == "OffStream" %}
+                            {% if research.getKeywords2 %}
+                                Keywords: {{ research.getKeywords2 }}
+                            {% elif research.getScreenName %}
+                                Screen name: {{ research.getScreenName }}
+                            {% else %}
+                                Hashtag: {{ research.getHashtags }}
+                            {% endif %}
+                        {% else %}
+                            Description : {{ research.getDescription }}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-4 text-center">
                     <div class="border rounded p-3 m-0  list-group-item-action">
                         <i class="fab fa-twitter h1"></i><br>
+                        {% if research.researchType.type == 'Upload' %}
+                            {{ research.numberOfTweets }} Tweets uploaded
+                        {% else %}
                         {{ research.numberOfTweets }} Tweets collected
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -41,7 +57,7 @@
                 <div class="col-lg-4 text-center">
                     <div class="border rounded p-3 m-0  list-group-item-action">
                         <i class="fas fa-stopwatch h1"></i> <br>
-                        {{ streamingDuration }} seconds
+                        {{ research.executionDuration|floatformat:2 }} seconds
                     </div>
                 </div>
                 <div class="col-lg-4 text-center">

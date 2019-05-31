@@ -18,6 +18,7 @@ class getTweetsByKeyWords:
         self.keyWords = keyWords
         self.count = count
         self.since = since
+        self.tweetsCounter = 0
         self.file = open('static/collected_data/results_{}.json'.format(researchId), 'w')
 
     def keywordFormatter(self):
@@ -31,7 +32,7 @@ class getTweetsByKeyWords:
         for tweet in Cursor(api.search,
                             q=self.keyWords, since=self.since).items(int(self.count)):
             tweets.append(json.dumps(tweet._json))
-
+            self.tweetsCounter += 1
 
         new_data = "[" + ",".join(tweets) + "]"
         self.file.write(new_data)
@@ -40,3 +41,4 @@ class getTweetsByKeyWords:
 def main(count, since, keywords, researchId):
     getTweets = getTweetsByKeyWords(count, since, keywords, researchId)
     getTweets.getTweets()
+    return getTweets.tweetsCounter

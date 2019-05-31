@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
@@ -57,8 +59,8 @@ def uploadTweets(request):
             upload = form.save()
             upload.resultsFileName = 'static/collected_data/results_{}.json' \
                 .format(upload.researchId)
-            upload.save()
             upload.numberOfTweets = uploadedTweetsParser(upload.jsonFile, upload.researchId)
+            upload.save()
             return redirect(resultsViews.results, upload.researchId)
         else:
             return render(request, 'template1/uploadTweets.html', locals())
@@ -72,9 +74,12 @@ def streamSearch(request):
         post = form.save(commit=False)
         post.researchType = researchType.objects.get(type='Stream')
         post = form.save()
+
+        start_time = time.time()
         post.numberOfTweets = twitter_streamer.main(request.POST['streamingDuration'],
                                                     StringToArray(request.POST['keywords']),
                                                     post.researchId)
+        post.executionduration = time.time() - start_time
         post.ratio = float(post.numberOfTweets) / float(post.streamingDuration)
         post.resultsFileName = 'static/collected_data/results_{}.json' \
             .format(post.researchId)
@@ -90,9 +95,10 @@ def screenNameSearch(request):
         post = form.save(commit=False)
         post.researchType = researchType.objects.get(type='OffStream')
         post = form.save()
-        byScreenName.main(request.POST["count"], request.POST["since"], request.POST["screen"], post.researchId)
-        post.numberOfTweets = request.POST["count"]
-        # post.ratio = float(post.numberOfTweets) / float(post.streamingDuration)
+        start_time = time.time()
+        post.numberOfTweets = byScreenName.main(request.POST["count"], request.POST["since"], request.POST["screen"], post.researchId)
+        post.executionDuration = time.time() - start_time
+        post.ratio = float(post.numberOfTweets / post.executionDuration)
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
@@ -106,9 +112,11 @@ def tagSearch(request):
         post = form.save(commit=False)
         post.researchType = researchType.objects.get(type='OffStream')
         post = form.save()
-        byHashTag.main(request.POST['count'], request.POST['since'], request.POST['tag'], post.researchId)
-        post.numberOfTweets = request.POST["count"]
-        # post.ratio = float(post.numberOfTweets) / float(post.streamingDuration)
+
+        start_time = time.time()
+        post.numberOfTweets = byHashTag.main(request.POST['count'], request.POST['since'], request.POST['tag'], post.researchId)
+        post.executionduration = time.time() - start_time
+        post.ratio = float(post.numberOfTweets / post.executionduration)
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
@@ -118,14 +126,15 @@ def tagSearch(request):
 
 def keySearch(request):
     form = byKeywordsForm(request.POST)
-    print(form)
     if form.is_valid():
         post = form.save(commit=False)
         post.researchType = researchType.objects.get(type='OffStream')
         post = form.save()
-        ByKeyWord.main(request.POST["count"], request.POST["since"], request.POST["keywords1"], post.researchId)
-        post.numberOfTweets = request.POST["count"]
-        # post.ratio = float(post.numberOfTweets) / float(post.streamingDuration)
+
+        start_time = time.time()
+        post.numberOfTweets = ByKeyWord.main(request.POST["count"], request.POST["since"], request.POST["keywords1"], post.researchId)
+        post.executionduration = time.time() - start_time
+        post.ratio = float(post.numberOfTweets / post.executionduration)
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post

@@ -18,6 +18,7 @@ class getTweetsByScreenName:
         self.authentification = TwitterAuth.authentification_twitter()
         self.screenName = screenName
         self.count = count
+        self.tweetsCounter = 0
         self.since = since
         self.file = open('static/collected_data/results_{}.json'.format(researchId), 'w')
 
@@ -28,7 +29,8 @@ class getTweetsByScreenName:
             for tweet in Cursor(api.user_timeline,
                                 screen_name=self.screenName, since=self.since).items(int(self.count)):
                 tweets.append(json.dumps(tweet._json))
-
+                if tweet is not None:
+                    self.tweetsCounter += 1
             new_data = "[" + ",".join(tweets) + "]"
             self.file.write(new_data)
         except tweepy.error.TweepError as e1:
@@ -39,5 +41,5 @@ class getTweetsByScreenName:
 def main(count, since, screenName, researchId):
     getTweets = getTweetsByScreenName(count, since, screenName, researchId)
     getTweets.getTweets()
-
+    return getTweets.tweetsCounter
 
