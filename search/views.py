@@ -96,7 +96,8 @@ def screenNameSearch(request):
         post.researchType = researchType.objects.get(type='OffStream')
         post = form.save()
         start_time = time.time()
-        post.numberOfTweets = byScreenName.main(request.POST["count"], request.POST["since"], request.POST["screen"], post.researchId)
+        post.numberOfTweets = byScreenName.main(request.POST["count"], request.POST["since"], request.POST["screen"],
+                                                post.researchId)
         post.executionDuration = time.time() - start_time
         post.ratio = float(post.numberOfTweets / post.executionDuration)
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
@@ -114,9 +115,14 @@ def tagSearch(request):
         post = form.save()
 
         start_time = time.time()
-        post.numberOfTweets = byHashTag.main(request.POST['count'], request.POST['since'], request.POST['tag'], post.researchId)
+        post.numberOfTweets = byHashTag.main(request.POST['count'], request.POST['since'], request.POST['tag'],
+                                             post.researchId)
         post.executionduration = time.time() - start_time
-        post.ratio = float(post.numberOfTweets / post.executionduration)
+        if post.executionDuration == 0.0:
+            post.ratio = 0
+        else:
+            post.ratio = float(post.numberOfTweets / post.executionDuration)
+
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
@@ -132,9 +138,13 @@ def keySearch(request):
         post = form.save()
 
         start_time = time.time()
-        post.numberOfTweets = ByKeyWord.main(request.POST["count"], request.POST["since"], request.POST["keywords1"], post.researchId)
-        post.executionduration = time.time() - start_time
-        post.ratio = float(post.numberOfTweets / post.executionduration)
+        post.numberOfTweets = ByKeyWord.main(request.POST["count"], request.POST["since"], request.POST["keywords1"],
+                                             post.researchId)
+        post.executionDuration = time.time() - start_time
+        if post.executionDuration == 0.0:
+            post.ratio = 0
+        else:
+            post.ratio = float(post.numberOfTweets / post.executionDuration)
         post.resultsFileName = 'static/collected_data/results_{}.json'.format(post.researchId)
         post.save()
         return post
