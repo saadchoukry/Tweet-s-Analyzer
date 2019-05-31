@@ -8,7 +8,12 @@ from search.models import research as R
 class countryToALpha3:
     def __init__(self, research_id):
         self.locations = []
+        self.total = 0
+        self.validLocationsRatio = 0
+        self.invalidLocationsRatio = 0
+        self.unknownLocationsRatio = 0
         research = R.getResearchById(research_id)
+        self.totalTweets = research.numberOfTweets
         for tweet in get_json(research):
             if str(tweet["user"]["location"]) != "None":
                 self.locations.append(tweet["user"]["location"])
@@ -16,7 +21,7 @@ class countryToALpha3:
         self.alpha2Countries = []
         self.alpha3Countries = []
         self.countryCounter = {}
-        self.total = 0
+
         self.file = open('static/collected_coutries', 'w')
 
     def getAlpha2Countries(self):
@@ -50,3 +55,12 @@ class countryToALpha3:
                 country["fillKey"] = "MEDIUM"
             if country["numberOfThings"] / self.total < 0.10:
                 country["fillKey"] = "LOW"
+
+    def updateValidLocationsRatio(self):
+        self.validLocationsRatio = int((len(self.locations) / self.totalTweets) * 100)
+
+    def updateInvalidLocationsRatio(self):
+        self.invalidLocationsRatio = int(((len(self.locations) - self.total)/self.totalTweets)*100)
+
+    def updateUnknownLocationsRatio(self):
+        self.unknownLocationsRatio = int(100-(self.invalidLocationsRatio+self.validLocationsRatio))

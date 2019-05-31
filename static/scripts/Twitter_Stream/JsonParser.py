@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import re
+from pprint import pprint
 
 
 def get_json(research):
@@ -9,9 +10,9 @@ def get_json(research):
     data = jsonFile.read()
     return json.loads(data)
 
-def jsonParser2(researchId):
 
-    file = open('static/collected_data/results_{}.json'.format(researchId),'r')
+def jsonParser2(researchId):
+    file = open('static/collected_data/results_{}.json'.format(researchId), 'r')
     data = file.read()
     new_data = "[" + data.replace('\n\n', ',')[:-1] + "]"
     file.close()
@@ -22,6 +23,19 @@ def jsonParser2(researchId):
     print('Data parsed successfully.')
     return len(json_data)
 
+
+def uploadedTweetsParser(apiOutput,researchId):
+    file = open(str(apiOutput),'r')
+    data = file.read()
+    file.close()
+    new_data =  data.replace('\n\n', ',')[:-1] + "]"
+    file = open('static/collected_data/results_{}.json'.format(researchId), 'w')
+    file.write(new_data)
+    pprint(new_data)
+    file.close()
+    json_data = json.loads(new_data)
+    print('Data parsed successfully.')
+    return len(json_data)
 
 
 def directoryCreator(keywordsArray, creation_date=datetime.date.today(), search_type="Streaming"):
@@ -44,16 +58,16 @@ def jsonParser(keywords):
     os.chdir("static/scripts/Twitter_stream/tweets/" + directoryName)
     data_json = json.loads(new_data)
 
-    tweets_counter=0
+    tweets_counter = 0
     for singleTweet in data_json:
         fileName = "Tweet_{0}.json".format(str(data_json.index(singleTweet) + 1))
         singlefile = open(fileName, 'w+')
         json.dump(singleTweet, singlefile)
         tweets_counter = data_json.index(singleTweet)
     print("{0} Tweets added .".format(str(tweets_counter - 1)))
-    return  tweets_counter
+    return tweets_counter
 
 
 def StringToArray(string):
-    array=re.compile(" +").split(string)
+    array = re.compile(" +").split(string)
     return array

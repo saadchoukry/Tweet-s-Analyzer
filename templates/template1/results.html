@@ -4,12 +4,9 @@
 
 {% block recap %}
      <link rel="stylesheet" href="../../static/css/disabledbutton.css">
-
-    <div class="align-self-end text-center mt-5" id="testgif1" >
-
-    </div>
+    <div class="align-self-end text-center mt-4" id="testgif1" style="margin-top:0px;"></div>
     <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 50px;">
-        <div class="section-headlines" style="padding-top: 0">
+        <div class="section-headlines" style="padding-top: 0;margin-bottom:20px;">
             <h4>Recap</h4>
         </div>
         <div class="container">
@@ -80,7 +77,7 @@
         $('.actiongif').click(function() {
             clearBox("ToDisable1");
             clearBox("ToDisable2");
-            $('#testgif1').html('<img  src="../../static/images/Blocks-2.9s-200px.gif">');
+            $('#testgif1').html('<img  src="../../static/images/Blocks-2.9s-200px.gif" style="margin-top:150px;">');
         });
       });
     </script>

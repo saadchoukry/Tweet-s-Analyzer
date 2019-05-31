@@ -8,6 +8,7 @@ import twitter_streamer
 from JsonParser import StringToArray
 from results import views as resultsViews
 import ByKeyWord
+from JsonParser import uploadedTweetsParser
 
 
 def home(request):
@@ -45,6 +46,24 @@ def search(request):
                 return redirect(resultsViews.results, post.researchId)
     else:
         return render(request, 'template1/researchType.html', locals())
+
+
+def uploadTweets(request):
+    if request.method == "POST":
+        form = uploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+            upload.researchType = researchType.objects.get(type='Upload')
+            upload = form.save()
+            upload.resultsFileName = 'static/collected_data/results_{}.json' \
+                .format(upload.researchId)
+            upload.save()
+            upload.numberOfTweets = uploadedTweetsParser(upload.jsonFile, upload.researchId)
+            return redirect(resultsViews.results, upload.researchId)
+        else:
+            return render(request, 'template1/uploadTweets.html', locals())
+    else:
+        return render(request, 'template1/uploadTweets.html', {})
 
 
 def streamSearch(request):

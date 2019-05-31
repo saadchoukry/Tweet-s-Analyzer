@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class researchType(models.Model):
-    researchTypes = (('Stream', 'Stream'), ('OffStream', 'OffStream'))
+    researchTypes = (('Stream', 'Stream'), ('OffStream', 'OffStream'),('Upload','Upload'))
     type = models.CharField(default='Stream', choices=researchTypes, max_length=10)
 
     class Meta:
@@ -12,6 +12,9 @@ class researchType(models.Model):
 
     def __str__(self):
         return 'Type : {}'.format(self.type)
+
+
+
 
 
 class research(models.Model):
@@ -66,6 +69,11 @@ class research(models.Model):
         verbose_name_plural = "Researches"
         ordering = ["researchDate"]
 
+class uploadedTweets(research):
+    jsonFile = models.FileField(upload_to='static/uploaded_data/', max_length=100,default='')
+    description = models.TextField(default='')
+
+
 
 class streamingResearch(research):
     keywords = models.TextField(max_length=100,blank=True)
@@ -83,13 +91,9 @@ class streamingResearch(research):
     def getResearchById(id):
         return streamingResearch.objects.get(researchId=id)
 
-
 class offStreamResearch(research):
     since = models.DateField(default=timezone.now(),blank=True)
     count = models.IntegerField(default=0,blank=True)
-
-
-
 
 class ByScreenName(offStreamResearch):
     screen = models.TextField(default=" ", max_length=100,blank=True)
@@ -101,7 +105,6 @@ class ByScreenName(offStreamResearch):
     def __str__(self):
         return self.screen + "  " + str(self.researchDate)
 
-
 class ByHashtags(offStreamResearch):
     tag = models.TextField(default="", max_length=100,blank=True)
 
@@ -112,7 +115,6 @@ class ByHashtags(offStreamResearch):
     def __str__(self):
         return self.tag + "  " + str(self.researchDate)
 
-
 class ByKeywords(offStreamResearch):
     keywords1 = models.TextField(default="", max_length=100,blank=True)
 
@@ -122,6 +124,8 @@ class ByKeywords(offStreamResearch):
 
     def __str__(self):
         return self.keywords1 + "  " + str(self.researchDate)
+
+
 
 
 class stats:

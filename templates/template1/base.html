@@ -33,10 +33,11 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse hidden-xs " style="margin: auto;margin-left: 450px;" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse hidden-xs " style="margin: auto;margin-left: 350px;" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'home' %}">Home</a></li>
                 <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'search' %}">Search for tweets</a></li>
+                <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'uploadTweets' %}">Upload tweets</a></li>
                 <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'PreviousResearches' %}">Previous researchs</a></li>
                 <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'home' %}#team">Our Team</a></li>
                 <li class="nav-item active"><a class="nav-link text-dark" href="{% url 'admin:index' %}">Admin section</a></li>
@@ -62,7 +63,8 @@
 {% block partners %}{% endblock %}
 {% block idDoesNotExist %} {% endblock %}
 {% block loading %}{% endblock %}
-<footer class="footer">
+{% block upload %}{% endblock %}
+<footer class="footer" style="text-align: center;left: 0;bottom: 0;width: 100%;>
   <div class="container">
       <div class="row ">
           <div class="mx-auto" style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid</div>

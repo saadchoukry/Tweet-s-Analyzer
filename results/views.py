@@ -15,11 +15,14 @@ def results(request, research_id):
     if research.researchType.type == 'Stream':
         keywords = research.getKeywords
         streamingDuration = research.getStreamingDuration
-    else:
+    elif research.researchType.type == 'OffStream':
         since = research.getSince
         count = research.getCount
-    print(locals())
+    else:
+        print("UPLOAD !! ")
     return render(request, 'template1/results.html', locals())
+
+
 # RESULTS [END]
 
 
@@ -30,6 +33,9 @@ def mapping(request, research_id):
     converter.getAlpha3Countries()
     converter.getCountryCount()
     converter.updateFillKeys()
+    converter.updateValidLocationsRatio()
+    converter.updateInvalidLocationsRatio()
+    converter.updateUnknownLocationsRatio()
     dataToSendToJs = json.dumps(converter.countryCounter, cls=DjangoJSONEncoder)
     return render(request, 'template1/mapping.html', locals())
 
@@ -42,9 +48,10 @@ def visualization(request, research_id):
         raise Http404
     creator = nodesRelationshipsCreator()
     creator.addNodes(research_id)
-    nodeLabels = creator.getCurrentNodeLabels()[0]
-    relationshipLabels = creator.getCurrentRelationshipsLabels()[0]
-    nodeLabelCount =  creator.getCurrentNodeLabels()[1]
-    relationshipLabelCount = creator.getCurrentRelationshipsLabels()[1]
+    data = creator.getVizData()
+    nodeLabelsAndCounter = data[0]
+    relationshipLabelsAndCounter = data[1]
+    nodeLabelCount = data[2]
+    relationshipLabelCount = data[3]
     return render(request, 'template1/visualization.html', locals())
 # VISUALISATION [END]

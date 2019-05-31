@@ -95,33 +95,28 @@ function nodeLabelsListener(){
 	let Hashtag = document.getElementById("Hashtag");
 	let Language = document.getElementById("Language");
 	let Source = document.getElementById("Source");
-	Tweets.addEventListener('change',function () {
-		if (Tweets.checked) viz.renderWithCypher(getNodes("Tweet"));
-		else{}
+	Tweets.addEventListener('click',function () {
+		viz.renderWithCypher(getNodes("Tweet"));
     });
 
-	Location.addEventListener('change',function () {
-		if (Location.checked) viz.renderWithCypher(getNodes("Location"));
-		else{}
+	Location.addEventListener('click',function () {
+		viz.renderWithCypher(getNodes("Location"));
 	});
 
-	Hashtag.addEventListener('change',function () {
-		if (Hashtag.checked) viz.renderWithCypher(getNodes("Hashtag"));
-		else{}
+	Hashtag.addEventListener('click',function () {
+		viz.renderWithCypher(getNodes("Hashtag"));
 	});
 
-	User.addEventListener('change',function () {
-		if (User.checked) viz.renderWithCypher(getNodes("User"));
-		else{}
+	User.addEventListener('click',function () {
+		viz.renderWithCypher(getNodes("User"));
+
 	});
 
-	Source.addEventListener('change',function () {
-		if (Source.checked) viz.renderWithCypher(getNodes("Source"));
-		else{}
+	Source.addEventListener('click',function () {
+		viz.renderWithCypher(getNodes("Source"));
 	});
-	Language.addEventListener('change',function () {
-		if (Language.checked) viz.renderWithCypher(getNodes("Language"));
-		else{}
+	Language.addEventListener('click',function () {
+		viz.renderWithCypher(getNodes("Language"));
 	});
 }
 
@@ -132,36 +127,40 @@ function relationshipsLabelsListener() {
 	let HAS_TAG = document.getElementById("HAS_TAG");
 	let TALKS = document.getElementById("TALKS");
 	let VIA = document.getElementById("VIA");
-	HAS_TWEETED.addEventListener('change',function () {
-		if (HAS_TWEETED.checked) viz.renderWithCypher(getRelationShips("HAS_TWEETED"));
-		else{}
+	let HAS_RETWEETED = document.getElementById("HAS_RETWEETED");
+	let IS_POSTED_FROM = document.getElementById("IS_POSTED_FROM");
+	HAS_TWEETED.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("HAS_TWEETED"));
     });
 
-	IS_FROM.addEventListener('change',function () {
-		if (IS_FROM.checked) viz.renderWithCypher(getRelationShips("IS_FROM"));
-		else{}
+	IS_FROM.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("IS_FROM"));
 	});
 
-	HAS_TAG.addEventListener('change',function () {
-		if (HAS_TAG.checked) viz.renderWithCypher(getRelationShips("HAS_TAG"));
-		else{}
+	HAS_TAG.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("HAS_TAG"));
 	});
 
-	HAS_MENTIONED.addEventListener('change',function () {
-		if (HAS_MENTIONED.checked) viz.renderWithCypher(getRelationShips("HAS_MENTIONED"));
-		else{}
+	HAS_MENTIONED.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("HAS_MENTIONED"));
 	});
 
-	VIA.addEventListener('change',function () {
-		if (VIA.checked) viz.renderWithCypher(getRelationShips("VIA"));
-		else{}
+	VIA.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("VIA"));
 	});
-	TALKS.addEventListener('change',function () {
-		if (TALKS.checked) viz.renderWithCypher(getRelationShips("TALKS"));
-		else{}
+	TALKS.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("TALKS"));
 	});
 
+	HAS_RETWEETED.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("HAS_RETWEETED"));
+	});
+
+	IS_POSTED_FROM.addEventListener('click',function () {
+		viz.renderWithCypher(getRelationShips("IS_POSTED_FROM"));
+    });
 }
 
 nodeLabelsListener();
 relationshipsLabelsListener();
+

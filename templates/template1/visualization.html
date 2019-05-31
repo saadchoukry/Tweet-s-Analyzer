@@ -1,4 +1,5 @@
 {% extends 'template1/base.html' %}
+{% load get_item %}
 {% block title %}Neo4j visualization
 {% endblock %}
 
@@ -37,17 +38,18 @@
                 <span class="badge badge-primary badge-pill">{{ nodeLabelCount }}</span>
               </li>
                 </a>
-                {% for nodeLabel in nodeLabels %}
-                <div class="form-check nodeLabels" style="display: none;">
-                  <input class="form-check-input" type="checkbox"  id="{{ nodeLabel }}">
-                  <label class="form-check-label" for="{{ nodeLabel }}">
-                    {{ nodeLabel }}
-                  </label>
-                </div>
+
+                <div class="form-check  nodeLabels" style="display: none;margin-top: 5px;">
+                    {% for nodeLabel in nodeLabelsAndCounter %}
+                        <a href="#" id="{{ nodeLabel }}" style="margin-bottom: 5px;">
+                        <span class="badge badge-pill badge-primary"  style="padding:6px;">
+                            {{ nodeLabel }} ({{ nodeLabelsAndCounter|get_item:nodeLabel}})</span>
+                        </a>
                    {% endfor %}
+                </div>
 
 
-             <a id="relLabels" href="#" class="list-group-item-action flex-column align-items-start ">
+             <a id="relLabels" href="#" class="list-group-item-action flex-column align-items-start " style="margin-top:10px;">
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 Relationships
                 <span class="badge badge-primary badge-pill">{{ relationshipLabelCount }}</span>
@@ -55,19 +57,19 @@
              </a>
             </ul>
 
-            {% for relationShipLabel in relationshipLabels %}
-            <div class="form-check relLabels" style="display: none;">
-              <input class="form-check-input" type="checkbox"  id="{{ relationShipLabel }}">
-              <label class="form-check-label" for="{{ relationShipLabel }}">
-                {{ relationShipLabel }}
-              </label>
-            </div>
+            <div class="form-check relLabels" style="display: none;margin-top: 5px;">
+            {% for relationShipLabel in relationshipLabelsAndCounter %}
+                <a href="#" id="{{ relationShipLabel }}">
+                <span class="badge badge-pill badge-primary"  style="padding:6px;">
+                        {{ relationShipLabel }} ({{ relationshipLabelsAndCounter|get_item:relationShipLabel }})</span>
+                </a>
             {% endfor %}
+            </div>
             </div>
     </div>
 
      <div class="row">
-         <div class="col-3 offset-lg-5 mt-5">Powered by :
+         <div class="col-3 offset-lg-5 mt-2 mb-2">Powered by :
              <img src="../../static/images/neo4j_logo.png" style="width: 120px;height: 50px;"  alt="">
          </div>
      </div>

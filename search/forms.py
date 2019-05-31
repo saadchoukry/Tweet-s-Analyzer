@@ -1,7 +1,7 @@
 from datetime import date
 
 from django import forms
-from search.models import streamingResearch, ByScreenName, ByHashtags, ByKeywords
+from search.models import streamingResearch, ByScreenName, ByHashtags, ByKeywords, uploadedTweets
 
 
 class streamingForm(forms.ModelForm):
@@ -159,3 +159,8 @@ class byKeywordsForm(forms.ModelForm):
             self._errors['since'] = self.error_class([
                 'Since Date must be set .'])
         return self.cleaned_data
+
+class uploadForm(forms.ModelForm):
+    class Meta:
+        model = uploadedTweets
+        fields = ['jsonFile','description']

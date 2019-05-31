@@ -3,17 +3,21 @@
 {% block title %} Mapping{% endblock %}
 {% block mapping %}
 
-<div class="section type-2" style="padding-bottom: 0">
-    <div class="section-headlines">
-    <h4>Mapping</h4>
+<div class="section type-2" style="padding:10px 0;">
+    <div class="section-headlines" style="margin-bottom: 0px;">
+    <h4 style="padding-bottom: 0px;margin-bottom: 0px;">Mapping</h4>
     </div>
 <script src="../../static/scripts/d3.min.js"></script>
 <script src="../../static/scripts/topojson.min.js"></script>
 <script src="../../static/scripts/datamaps_world_min.js"></script>
+<div>Valid locations ratio : {{ converter.validLocationsRatio }}%
+    <br>
+Unrecognized locations ratio : {{ converter.invalidLocationsRatio }}%
+    <br>
+Unknown locations ratio: {{ converter.unknownLocationsRatio }}%</div>
 <div id="container180" style="position: relative; margin:auto;height: 700px;"></div>
 <script>
     var received_data  = {{ dataToSendToJs|safe }}
-    console.log(received_data)
     var map = new Datamap({element: document.getElementById('container180'),
     fills: {
 
@@ -27,7 +31,7 @@
         popupTemplate: function (geo, data) {
             return ['<div class="hoverinfo"><strong>',
                  geo.properties.name,
-                ': ' + data.numberOfThings + ' user(s)',
+                ': ' + data.numberOfThings + ' tweet(s)',
                 '</strong></div>'].join('');
         }
     }

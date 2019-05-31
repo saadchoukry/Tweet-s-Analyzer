@@ -22,6 +22,7 @@ urlpatterns = [
     path('', searchViews.home),
     path('home/', searchViews.home, name='home'),
     path('search/',searchViews.search,name='search'),
+    path('uploadTweets/',searchViews.uploadTweets,name='uploadTweets'),
     path('previousResearches/',searchViews.previous, name='PreviousResearches'),
     path('results/<research_id>/', resultsViews.results, name='results'),
     path('mapping/<research_id>/', resultsViews.mapping, name='mapping'),
