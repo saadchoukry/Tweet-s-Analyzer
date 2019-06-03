@@ -2,7 +2,7 @@
 Neo4j connexion credentials
 """
 #LOCAL
-BOLTSERVER = "bolt://localhost:11001"
+BOLTSERVER = "bolt://localhost:11008"
 USER = "neo4j"
 PASSWORD = "123456"
 

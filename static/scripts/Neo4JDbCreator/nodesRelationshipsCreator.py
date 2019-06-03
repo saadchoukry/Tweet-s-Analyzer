@@ -8,7 +8,7 @@ from neo4jAuth import neo4jAuth
 from JsonParser import get_json
 from search.models import research as R
 from py2neo.database import Schema
-
+from py2neo.data import Record
 
 class nodesRelationshipsCreator:
 
@@ -17,8 +17,10 @@ class nodesRelationshipsCreator:
         self.graph = server.graphAuth()
         self.transaction = self.graph.begin()
         self.nodeCount = 0
+        self.relationshipsCount = 0
         self.res = None
         self.tweetsCounter = 0
+        self.record = None
 
     def delete_all_nodes(self):
         self.graph.delete_all()
@@ -54,10 +56,12 @@ class nodesRelationshipsCreator:
             RELATIONSHIP = Relationship(nodeFrom, relationshipLabel, newNodeTo)
             self.transaction.create(RELATIONSHIP)
             self.nodeCount += 1
+            self.relationshipsCount += 1
             return newNodeTo
         else:
             RELATIONSHIP = Relationship(nodeFrom, relationshipLabel, nodeMatch)
             self.transaction.create(RELATIONSHIP)
+            self.relationshipsCount += 1
             return nodeMatch
 
     def addNodes(self, research_id):
@@ -127,3 +131,7 @@ class nodesRelationshipsCreator:
         for relationLabel in relationshipsLabels:
             relationShipCount[relationLabel] = self.getNumberOfOccurencesRelationships(relationLabel)
         return nodeLabelsCount, relationShipCount, numberOfLabelsCounter, numberOfRelLabelsCounter
+
+    def getRecord(self,cypherRequest):
+        self.record = Record(self.graph.evaluate(cypherRequest))
+        return dict(self.record)

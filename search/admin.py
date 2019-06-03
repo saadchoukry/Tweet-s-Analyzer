@@ -18,7 +18,7 @@ delete_research_json.short_description = "Delete research(es) and collected twee
 
 @admin.register(research)
 class researchAdmin(admin.ModelAdmin):
-    date_hierarchy = 'researchDate'
+    ordering = ('researchDate',)
     search_fields = ['researchId', 'researchDate', 'researchType']
     list_display = ('researchId', 'researchDate','researchType','numberOfNodes')
     actions = [delete_research_json]

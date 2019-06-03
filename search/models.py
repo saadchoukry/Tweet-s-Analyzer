@@ -69,7 +69,7 @@ class research(models.Model):
     class Meta:
         verbose_name = "Research"
         verbose_name_plural = "Researches"
-        ordering = ["researchDate"]
+        ordering = ["-researchDate"]
 
 
 class uploadedTweets(research):

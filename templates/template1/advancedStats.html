@@ -1,0 +1,65 @@
+{% extends 'template1/base.html' %}
+{% block title %}Advanced Stats
+{% endblock %}
+
+{% block advancedStats %}
+<div class="section type-2" style="padding-top: 60px;">
+    <div class="container">
+    <div class="section-headlines"    style="margin-bottom: 30px;">
+    <h4>Rankings</h4>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+    {% for stat in results %}
+            <table class="col-lg-5 offset-lg-1 table table-hover text-center" >
+                  <caption class="text-center" style="caption-side: top;">
+                      {% if forloop.counter == 1 %}
+                          <h4>[User -> Mentions] ranking </h4>
+                          <br>
+                      {% elif forloop.counter == 2  %}
+                          <h4>[Tweet -> Tags] ranking </h4>
+                          <br>
+                      {% elif forloop.counter == 3  %}
+                          <br>
+                          <br>
+                          <h4>[User -> Tweets] ranking </h4>
+                          <br>
+
+                      {% elif forloop.counter == 4  %}
+                           <br>
+                           <br>
+                          <h4>[Tweet -> Retweets] ranking </h4>
+                          <br>
+                      {% endif %}
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Ranking</th>
+                      {% if forloop.counter == 1 %}
+                            <th scope="col">Screen name</th>
+                      {% elif forloop.counter == 2  %}
+                            <th scope="col">Tweet text</th>
+                      {% elif forloop.counter == 3  %}
+                            <th scope="col">Screen name</th>
+                      {% elif forloop.counter == 4  %}
+                            <th scope="col">Tweet text</th>
+                      {% endif %}
+                      <th scope="col">Score</th>
+                    </tr>
+                  </thead>
+            {% for element in stat %}
+                  <tbody>
+                    <tr >
+                      <td scope="row">{{ forloop.counter }}</td>
+                      <td scope="col">{{element.page|truncatechars:20 }}</td>
+                      <td scope="col">{{element.score|floatformat:2 }}</td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+{% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}

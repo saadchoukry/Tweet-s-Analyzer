@@ -12,7 +12,7 @@ function drawAll(viz){
 function initVizFrame() {
 		var config = {
 			container_id:"mainDiv",
-			server_url:"bolt://localhost:11001",
+			server_url:"bolt://localhost:11008",
 			server_user:"neo4j",
 			server_password:"123456",
 			initial_cypher: "MATCH (a)-[r]-(b) return a,r,b",
