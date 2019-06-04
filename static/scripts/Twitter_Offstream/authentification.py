@@ -6,7 +6,7 @@ from tweepy import *
 
 
 # Authentification
-from .credentials import *
+from credentials import *
 
 
 class TwitterAuth:

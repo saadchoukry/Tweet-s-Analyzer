@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%; overflow-x: hidden;">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -21,7 +21,7 @@
 
 </head>
 
-<body>
+<body style="display: flex; flex-direction: column;">
 <nav class="navbar navbar-expand-lg navbar-light"  role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -65,13 +65,13 @@
 {% block loading %}{% endblock %}
 {% block upload %}{% endblock %}
 {% block advancedStats %}{% endblock %}
-<footer class="footer" style="text-align: center;left: 0;bottom: 0;width: 100%;">
-  <div class="container">
-      <div class="row ">
-          <div class="mx-auto" style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid</div>
-      </div>
-  </div>
 
+<footer class="footer" style="text-align: center;left: 0;bottom: 0;width: 100%;">
+    <div class="container">
+        <div class="row ">
+            <div class="mx-auto" style="margin:auto;">Tweet's Analyzer - By: Saâd Choukry & Youssef Al Mouatamid</div>
+        </div>
+    </div>
 </footer>
 
 </body>
