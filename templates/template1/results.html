@@ -5,11 +5,27 @@
 {% block recap %}
      <link rel="stylesheet" href="../../static/css/disabledbutton.css">
     <div class="align-self-end text-center mt-4" id="testgif1" style="margin-top:0px;"></div>
-    <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 50px;">
-        <div class="section-headlines" style="padding-top: 0;margin-bottom:20px;">
+    <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 0px;">
+        <div class="section-headlines" style="padding-top: 0;margin-bottom:10px;">
             <h4>Recap</h4>
         </div>
         <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center" style="margin-bottom: 30px;">
+                {% if neo4jVersion %}
+                <i class="fas fa-check-circle h3" style="color: green;">
+                 <span style="color: black;" >Neo4j version :
+                     {{ neo4jVersion|slice:"1:2" }}.{{ neo4jVersion|slice:"4:5" }}.{{ neo4jVersion|slice:"7:8" }} </span>
+                </i>
+                {% else %}
+                    <i class="fas fa-times-circle h3" style="color: darkred">
+                        <span style="color: black;" >No connection to database </span><br>
+                    <h2>You need to connect to a Neo4j database to access to visualization</h2>
+                    </i>
+
+                {% endif %}
+            </div>
+        </div>
             <div class="row">
                 <div class="col-lg-4 text-center ">
                     <div class="border rounded p-3 m-0 list-group-item-action">
@@ -74,10 +90,15 @@
 
     <div class="row" id="ToDisable2">
         <div class="" style="margin: auto;">
+            {% if neo4jVersion %}
             <a href="{% url 'visualization' research.researchId %}">
                 <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-eye"></i>  Visualization</button>
             </a>
-
+            {% else %}
+            <a href="{% url 'visualization' research.researchId %}">
+                <button disabled class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-eye"></i>  Visualization</button>
+            </a>
+            {% endif %}
             <a href="{% url 'mapping' research.researchId %}" >
                 <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-map "></i>  Mapping</button>
             </a>

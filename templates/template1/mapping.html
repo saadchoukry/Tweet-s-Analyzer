@@ -7,14 +7,35 @@
     <div class="section-headlines" style="margin-bottom: 0px;">
     <h4 style="padding-bottom: 0px;margin-bottom: 0px;">Mapping</h4>
     </div>
+</div>
 <script src="../../static/scripts/d3.min.js"></script>
 <script src="../../static/scripts/topojson.min.js"></script>
 <script src="../../static/scripts/datamaps_world_min.js"></script>
-<div>Valid locations ratio : {{ converter.validLocationsRatio }}%
-    <br>
-Unrecognized locations ratio : {{ converter.invalidLocationsRatio }}%
-    <br>
-Unknown locations ratio: {{ converter.unknownLocationsRatio }}%</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 text-center ">
+            <div class="border rounded p-3 m-0 list-group-item-action">
+                <i class="fas fa-check h1"></i><br>
+                Valid locations ratio : {{ converter.validLocationsRatio }}%
+            </div>
+        </div>
+        <div class="col-lg-4 text-center">
+            <div class="border rounded p-3 m-0 list-group-item-action">
+                <i class="far fa-times-circle h1"></i><br>
+                Unrecognized locations ratio : {{ converter.invalidLocationsRatio }}%
+            </div>
+        </div>
+        <div class="col-lg-4 text-center">
+            <div class="border rounded p-3 m-0 list-group-item-action">
+                <i class="fas fa-question h1"></i><br>
+                Unknown locations ratio: {{ converter.unknownLocationsRatio }}%
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="container180" style="position: relative; margin:auto;height: 700px;"></div>
 <script>
     var received_data  = {{ dataToSendToJs|safe }}

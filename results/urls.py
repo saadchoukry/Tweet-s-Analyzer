@@ -6,7 +6,7 @@ urlpatterns = [
     path('<research_id>/', resultsViews.results, name='results'),
     path('mapping/<research_id>/', resultsViews.mapping, name='mapping'),
     path('visualization/<research_id>/', resultsViews.visualization, name='visualization'),
-    path('advancedStats/',resultsViews.advancedStats,name='advancedStats'),
+    path('advancedStats/<research_id>/', resultsViews.advancedStats,name='advancedStats'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

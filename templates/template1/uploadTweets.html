@@ -2,12 +2,12 @@
 {% block title %}Upload external tweets{% endblock %}
 
 {% block upload %}
-    <div class="section-headlines" style="padding-top: 0;margin-bottom:20px;">
+    <div class="section-headlines" style="padding-top: 50px;margin-bottom:20px;">
         <h4>Upload tweets</h4>
     </div>
 
 
-    <div class="container">
+    <div class="container" style="margin-bottom: 108px;margin-top: 50px;">
         <div class="col-6" style="margin: auto;">
             <form action="{% url 'uploadTweets' %}" class="form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}

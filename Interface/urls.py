@@ -18,11 +18,12 @@ from django.urls import path, include
 from search import views as searchViews
 from results import views as resultsViews
 
-
 urlpatterns = [
     path('', searchViews.home),
     path('home/', searchViews.home, name='home'),
-    path('search/',include('search.urls')),
-    path('results/',include('results.urls')),
+    path('search/', include('search.urls')),
+    path('results/', include('results.urls')),
     path('admin/', admin.site.urls),
 ]
+
+

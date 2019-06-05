@@ -1,17 +1,17 @@
 {% extends 'template1/base.html' %}
 
-{% block title %}Wrong page :({% endblock %}
-{% block error_404 %}
+{% block title %}Something went wrong{% endblock %}
+{% block error_500 %}
 <div class="container" style="padding-bottom: 120px;">
     <div class="section type-2" style="padding:10px 0;">
         <div class="section-headlines" style="margin-bottom: 0px;">
-        <h4 style="padding-bottom: 0px;margin-bottom: 50px; font-size: 2em;">The page you're searching for does not exist.</h4>
+        <h4 style="padding-bottom: 0px;margin-bottom: 50px; font-size: 2em;">Something went wrong</h4>
         </div>
     </div>
 
 
     <div class="col-lg-8 offset-lg-2 text-center">
-        <img src="../static/images/404.png" alt="">
+        <img src="../static/images/500.png" alt="">
     </div>
 </div>
 {% endblock %}
