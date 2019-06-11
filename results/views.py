@@ -36,7 +36,6 @@ def results(request, research_id):
     graph = auth.graphAuth()
     try:
         neo4jVersion = str(graph.database.kernel_version)
-        print(neo4jVersion)
     except Exception:
         print('No connection to database.')
     return render(request, 'template1/results.html', locals())

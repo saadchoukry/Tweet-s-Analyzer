@@ -1,17 +1,18 @@
 {% extends 'template1/base.html' %}
-
+{% load static %}
 {% block title %}Wrong page :({% endblock %}
 {% block error_404 %}
-<div class="container" style="padding-bottom: 120px;">
-    <div class="section type-2" style="padding:10px 0;">
-        <div class="section-headlines" style="margin-bottom: 0px;">
-        <h4 style="padding-bottom: 0px;margin-bottom: 50px; font-size: 2em;">The page you're searching for does not exist.</h4>
+    <link rel="stylesheet" href="{% static "css/404.css" %}">
+    <div class="container" style="padding-top: 200px;">
+     <section id="not-found">
+        <div class="circles">
+          <p>404<br>
+           <small>PAGE NOT FOUND</small>
+          </p>
+          <span class="circle big"></span>
+          <span class="circle med"></span>
+          <span class="circle small"></span>
         </div>
+      </section>
     </div>
-
-
-    <div class="col-lg-8 offset-lg-2 text-center">
-        <img src="../static/images/404.png" alt="">
-    </div>
-</div>
 {% endblock %}

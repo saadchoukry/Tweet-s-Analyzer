@@ -1,4 +1,5 @@
 {% extends 'template1/base.html' %}
+{% load static %}
 {% block title %}Upload external tweets{% endblock %}
 
 {% block upload %}
@@ -12,7 +13,7 @@
 
 
 
-    <div class="container" style="margin-bottom: 108px;margin-top: 50px;">
+    <div class="container" style="margin-bottom: 3px;margin-top: 50px;">
 
     <div class="container" style="flex: 1;">
 
@@ -48,10 +49,15 @@
                 {% endif %}
                 <br class="gap-50">
                 <div class="text-center">
-                    <button type="submit"  href="{% url 'uploadTweets' %}" style="width:150px;height:40px ;" class="btn btn-primary actiongif ">Upload</button>
+                    <button type="submit"  href="{% url 'uploadTweets' %}" style="width:150px;height:40px ;" class="btn btn-primary actiongif ">
+                        <i class="fas fa-upload mr-2" ></i>
+                         Upload
+                    </button>
                 </div>
             </form>
         </div>
     </div>
+    </div>
+</div>
     <br class="gap-70">
 {% endblock %}

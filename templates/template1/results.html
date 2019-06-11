@@ -1,30 +1,37 @@
 {% extends 'template1/base.html' %}
+{% load static %}
 {% block title %} Results{% endblock %}
 
 
 {% block recap %}
     <link rel="stylesheet" href="../../static/css/disabledbutton.css">
-    <div class="align-self-end text-center mt-4" id="testgif1" style="margin-top:0px;"></div>
-    <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 0px;">
-        <div class="section-headlines" style="padding-top: 0;margin-bottom:10px;">
+    <div class="align-self-center  mt-4" id="testgif1" >
+    </div>
 
-    <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 50px; flex: 1;">
-        <div class="section-headlines" style="padding-top: 0;margin-bottom:20px;">
-            <h4>Recap</h4>
+    <div id="ToDisable1" class="section type-2" style="padding-bottom: 0;padding-top: 0px; flex: 1;">
+        <div class="section-headlines" style="padding-top: 0;margin-bottom:10px;">
+            <h4 style="margin-bottom: 0;">Recap</h4>
         </div>
         <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" style="margin-bottom: 30px;">
                 {% if neo4jVersion %}
-                <i class="fas fa-check-circle h3" style="color: green;">
-                 <span style="color: black;" >Neo4j version :
-                     {{ neo4jVersion|slice:"1:2" }}.{{ neo4jVersion|slice:"4:5" }}.{{ neo4jVersion|slice:"7:8" }} </span>
-                </i>
+                    <button class="btn">
+                        <i class="fas fa-check-circle h3" style="color: green;"></i>
+                        <span class="h3" style="font-weight: lighter">
+                        Neo4j version: {{ neo4jVersion|slice:"1:2" }}.{{ neo4jVersion|slice:"4:5" }}.{{ neo4jVersion|slice:"7:8" }}
+                        </span>
+                    </button>
+
                 {% else %}
-                    <i class="fas fa-times-circle h3" style="color: darkred">
-                        <span style="color: black;" >No connection to database </span><br>
-                    <h2>You need to connect to a Neo4j database to access to visualization</h2>
-                    </i>
+                    <button class="btn">
+                        <i class="far fa-times-circle h4" style="color: red;"></i>
+                        <span class="h4" style="font-weight: lighter">
+                        No Database connection :
+                                Wrong configuration: see credentials ('Neo4jDbCreator' folder) or
+                                start your neo4j database in case it is shut down.
+                        </span>
+                    </button>
 
                 {% endif %}
             </div>
@@ -88,8 +95,8 @@
             </div>
         </div>
     </div>
-    <br class="gap-70">
 
+    <br class="gap-70">
 
     <div class="row" id="ToDisable2">
         <div class="" style="margin: auto;">
@@ -98,8 +105,8 @@
                 <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-eye"></i>  Visualization</button>
             </a>
             {% else %}
-            <a href="{% url 'visualization' research.researchId %}">
-                <button disabled class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="far fa-eye"></i>  Visualization</button>
+            <a href="#">
+                <button disabled class="btn btn-primary" style="width: 170px;height:50px;"><i class="far fa-eye"></i>  Visualization</button>
             </a>
             {% endif %}
             <a href="{% url 'mapping' research.researchId %}" >
@@ -109,8 +116,6 @@
     </div>
 
     <br class="gap-70">
-
-
     <script src="../../static/scripts/researchType.js"></script>
     <script>
         $(function() {

@@ -1,5 +1,5 @@
 {% extends 'template1/base.html' %}
-
+{% load static %}
 {% block title %}Tweets' Analyzer{% endblock %}
 
 {% block splash-block %}
@@ -96,7 +96,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="team_item">
-                        <div class="img_block"><img style="height:300px;" alt="" src="../../static/images/team/PHOTO_SAAD.jpg"></div>
+                        <div class="img_block"><img style="height:300px;" alt="" src="{% static "/images/team/PHOTO_SAAD.jpg"%}"></div>
                         <div class="team_body">
                             <h5>Saâd Choukry</h5>
                             <h6>Full-stack developer</h6>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="team_item">
-                        <div class="img_block"><img style="height:300px;" alt="" src="../../static/images/team/MrX.png"></div>
+                        <div class="img_block"><img style="height:300px;" alt="" src="{% static "images/team/MrX.png"%}"></div>
                         <div class="team_body">
                             <h5>Youssef Al Mouatamid</h5>
                             <h6>Full-stack developper</h6>
@@ -175,9 +175,9 @@
 
     <div class="container" style="background-color: white;">
     <div class="row">
-        <div class="col-lg-3 "><img style="width: 150px;height: 150px;margin-left: 200px;" src="../../static/images/twitter_logo.png" alt="" /></div>
-        <div class="col-lg-3 "><img style="width: 150px;height: 150px;margin-left: 175px;" src="../../static/images/FssmLogo.jpg" alt="" /></div>
-        <div class="col-lg-3 " ><img style="width: 290px;height: 160px;margin-left: 60px;" src="../../static/images/twitter_dev.jpg" alt="" /></div>
+        <div class="col-lg-3 "><img style="width: 150px;height: 150px;margin-left: 200px;" src="{% static "images/twitter_logo.png" %}" alt="" /></div>
+        <div class="col-lg-3 "><img style="width: 150px;height: 150px;margin-left: 175px;" src="{% static "images/FssmLogo.jpg" %}" alt="" /></div>
+        <div class="col-lg-3 " ><img style="width: 290px;height: 160px;margin-left: 60px;" src="{% static "images/twitter_dev.jpg" %}" alt="" /></div>
 
     </div>
   </div>

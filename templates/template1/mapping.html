@@ -1,16 +1,14 @@
 {% extends 'template1/base.html' %}
-
+{% load static %}
 {% block title %} Mapping{% endblock %}
 {% block mapping %}
 
 <div class="section type-2" style="padding:10px 0;">
-    <div class="section-headlines" style="margin-bottom: 0px;">
-    <h4 style="padding-bottom: 0px;margin-bottom: 0px;">Mapping</h4>
+    <div class="section-headlines" style="margin-bottom: 0;">
+    <h4 style="padding-bottom: 0;margin-bottom: 0;">Mapping</h4>
     </div>
 </div>
-<script src="../../static/scripts/d3.min.js"></script>
-<script src="../../static/scripts/topojson.min.js"></script>
-<script src="../../static/scripts/datamaps_world_min.js"></script>
+
 
 <div class="container">
     <div class="row">
@@ -35,10 +33,14 @@
     </div>
 </div>
 
-
-<div id="container180" style="position: relative; margin:auto;height: 700px;"></div>
+<div class="container">
+    <div  id="container180" style="position: relative; margin:auto;height: 700px;"></div>
+</div>
+<script src="../../static/scripts/d3.min.js"></script>
+<script src="../../static/scripts/topojson.min.js"></script>
+<script src="../../static/scripts/datamaps_world_min.js"></script>
 <script>
-    var received_data  = {{ dataToSendToJs|safe }}
+    var received_data  = {{ dataToSendToJs|safe }};
     var map = new Datamap({element: document.getElementById('container180'),
     fills: {
 
@@ -56,14 +58,9 @@
                 '</strong></div>'].join('');
         }
     }
-
     });
-    // Draw a legend for this map
-
     map.legend();
 </script>
-</div>
-
     <br class="gap-70">
     <br class="gap-70">
     <br class="gap-70">

@@ -15,8 +15,9 @@ class countryToALpha3:
         research = R.getResearchById(research_id)
         self.totalTweets = research.numberOfTweets
         for tweet in get_json(research):
-            if str(tweet["user"]["location"]) != "None":
-                self.locations.append(tweet["user"]["location"])
+            if "user" in tweet:
+                if str(tweet["user"]["location"]) != "None":
+                    self.locations.append(tweet["user"]["location"])
         self.countries = []
         self.alpha2Countries = []
         self.alpha3Countries = []
@@ -47,10 +48,11 @@ class countryToALpha3:
                 self.countryCounter[alpha3Country] = {"fillKey": None, "numberOfThings": 1}
 
     def updateFillKeys(self):
+        print(self.countryCounter)
         for country in self.countryCounter.values():
-            if country["numberOfThings"] / self.total >= 0.6:
+            if country["numberOfThings"] / self.total >= 0.20:
                 country["fillKey"] = "HIGH"
-            if (country["numberOfThings"] / self.total < 0.6) \
+            if (country["numberOfThings"] / self.total < 0.20) \
                     and (country["numberOfThings"] / self.total > 0.10):
                 country["fillKey"] = "MEDIUM"
             if country["numberOfThings"] / self.total < 0.10:

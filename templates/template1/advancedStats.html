@@ -1,4 +1,5 @@
 {% extends 'template1/base.html' %}
+{% load static %}
 {% block title %}Advanced Stats
 {% endblock %}
 
@@ -15,21 +16,21 @@
             <table class="col-lg-5 offset-lg-1 table table-hover text-center" >
                   <caption class="text-center" style="caption-side: top;">
                       {% if forloop.counter == 1 %}
-                          <h4>[User -> Mentions] ranking </h4>
+                          <h4>Most mentioning users </h4>
                           <br>
                       {% elif forloop.counter == 2  %}
-                          <h4>[Tweet -> Tags] ranking </h4>
+                          <h4>Most tagged tweets </h4>
                           <br>
                       {% elif forloop.counter == 3  %}
                           <br>
                           <br>
-                          <h4>[User -> Tweets] ranking </h4>
+                          <h4>most tweeting users </h4>
                           <br>
 
                       {% elif forloop.counter == 4  %}
                            <br>
                            <br>
-                          <h4>[Tweet -> Retweets] ranking </h4>
+                          <h4>most retweeted tweets </h4>
                           <br>
                       {% endif %}
                   </caption>

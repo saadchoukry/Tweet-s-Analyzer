@@ -1,18 +1,15 @@
 {% extends 'template1/base.html' %}
+{% load static %}
 {% load get_item %}
 {% block title %}Neo4j visualization
 {% endblock %}
 
 {% block neovis %}
-    <div class="section type-2" style="padding: 35px; flex: 1;">
-        <div class="section-headlines mt-0" style="margin-bottom: 0px;">
-            <h4 style="margin-bottom: 0px;padding-bottom: 0px;">Visualization</h4>
-        </div>
-    </div>
+
 
 <div class="container-fluid" style="flex: 1;">
     <div class="row mt-0">
-         <div class="col-lg-2 mr-auto" >
+         <div class="col-lg-2 mr-auto " >
                 <div class="text-center">
                         <div class="border rounded p-2 m-0 list-group-item-action" id="Visualize">
                             <i style="color:dodgerblue;" class="fas fa-play h1"></i><br>
@@ -26,37 +23,47 @@
                 </div>
          </div>
 
-         <div class="col-lg-8" id="mainDiv"  style="border: 1px solid lightgray;
-                font: 22pt arial;display:none;">
-         </div>
+        <div class="col-lg-8 text-center" id="mainDiv"  style="border: 3px solid lightgray;
+                font: 22pt arial;display:block;height:420px;">
+            <img class="mt-lg-5" src="{% static "images/vizDefault.png"%}" style="height: 300px;">
+        </div>
         <div class="col-lg-2">
             <ul class="list-group">
                 <a id="nodeLabels" href="#" class="list-group-item-action flex-column align-items-start ">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nodes
-                <span class="badge badge-primary badge-pill">{{ creator.nodeCount }}</span>
-              </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nodes
+                        <span class="badge badge-primary badge-pill">{{ creator.nodeCount }}</span>
+                    </li>
                 </a>
-
-                <div class="form-check  nodeLabels" style="display: none;margin-top: 5px;">
+            <div class="form-check  nodeLabels" style="display: none;margin-top: 5px;">
+                     <a href="#" id="allNodes" style="margin-bottom: 5px;">
+                            <span class="badge badge-pill badge-primary"  style="padding:6px;">
+                            All (*)
+                            </span>
+                    </a>
                     {% for nodeLabel in nodeLabelsAndCounter %}
                         <a href="#" id="{{ nodeLabel }}" style="margin-bottom: 5px;">
-                        <span class="badge badge-pill badge-primary"  style="padding:6px;">
+                            <span class="badge badge-pill badge-primary"  style="padding:6px;">
                             {{ nodeLabel }} ({{ nodeLabelsAndCounter|get_item:nodeLabel}})</span>
                         </a>
                    {% endfor %}
-                </div>
+            </div>
 
 
              <a id="relLabels" href="#" class="list-group-item-action flex-column align-items-start " style="margin-top:10px;">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Relationships
-                <span class="badge badge-primary badge-pill">{{ creator.relationshipsCount }}</span>
-              </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Relationships
+                    <span class="badge badge-primary badge-pill">{{ creator.relationshipsCount }}</span>
+                </li>
              </a>
-            </ul>
+                </ul>
 
             <div class="form-check relLabels" style="display: none;margin-top: 5px;">
+                <a href="#" id="allRel">
+                    <span class="badge badge-pill badge-primary"  style="padding:6px;">
+                        All (*)
+                    </span>
+                </a>
             {% for relationShipLabel in relationshipLabelsAndCounter %}
                 <a href="#" id="{{ relationShipLabel }}">
                 <span class="badge badge-pill badge-primary"  style="padding:6px;">
@@ -67,15 +74,10 @@
             </div>
     </div>
 
-     <div class="row">
-         <div class="col-3 offset-lg-5 mt-2 mb-2">Powered by :
-             <img src="../../static/images/neo4j_logo.png" style="width: 120px;height: 50px;"  alt="">
-         </div>
-     </div>
+    <br>
 
     <div class="row">
-        <div class="col-6 text-center" style="margin: auto;">
-
+        <div class="col-6 offset-lg-3 text-center" style="position: absolute;bottom: 100px;">
             <a href="{% url 'advancedStats' research_id %}">
                 <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="fas fa-chart-line"></i> Advanced stats</button>
             </a>
@@ -85,6 +87,12 @@
             </a>
         </div>
     </div>
+
+       <div class="row" >
+         <div class="col-3 offset-lg-5 mt-2 mb-2" style="position: absolute;bottom: 40px;">Powered by :
+             <img src="../../static/images/neo4j_logo.png" style="width: 120px;height: 50px;"  alt="">
+         </div>
+     </div>
 
         <br class="gap-70">
 </div>

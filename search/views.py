@@ -13,7 +13,7 @@ import ByKeyWord
 from JsonParser import uploadedTweetsParser
 
 
-def handler404(request,exception):
+def handler404(request):
     return render(request, '404.html', status=404)
 
 

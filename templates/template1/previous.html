@@ -1,9 +1,9 @@
 {% extends 'template1/base.html' %}
-
+{% load static %}
 
 {% block title %} Previous researches{% endblock %}
 {% block previousResearches %}
-        <div class="col-8 list-group " style="margin: auto; padding-top: 69px; flex: 1;">
+        <div class="col-8 list-group " style="margin: auto; padding-top: 0; flex: 1;">
             {% if previousResearches %}
                  <div class="section-headlines mb-5 mt-3">
                     <h4 class="mb-0">Previous researches</h4>
@@ -42,7 +42,7 @@
                 {% endfor %}
             {% else %}
                 <div class="m-auto mb-0">
-                    <img src="../../static/images/no_results_found.png">
+                    <img src="../../static/images/no_results_found.png" style="height:500px;">
                 </div>
             {% endif %}
             <br class="gap-70">

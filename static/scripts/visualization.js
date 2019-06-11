@@ -12,7 +12,7 @@ function drawAll(viz){
 function initVizFrame() {
 		var config = {
 			container_id:"mainDiv",
-			server_url:"bolt://localhost:7687",
+			server_url:"bolt://localhost:11008",
 			server_user:"neo4j",
 			server_password:"123456",
 			initial_cypher: "MATCH (a)-[r]-(b) return a,r,b",
@@ -95,6 +95,7 @@ function nodeLabelsListener(){
 	let Hashtag = document.getElementById("Hashtag");
 	let Language = document.getElementById("Language");
 	let Source = document.getElementById("Source");
+	let AllNodes = document.getElementById("allNodes");
 	Tweets.addEventListener('click',function () {
 		viz.renderWithCypher(getNodes("Tweet"));
     });
@@ -109,15 +110,19 @@ function nodeLabelsListener(){
 
 	User.addEventListener('click',function () {
 		viz.renderWithCypher(getNodes("User"));
-
 	});
 
 	Source.addEventListener('click',function () {
 		viz.renderWithCypher(getNodes("Source"));
 	});
+
 	Language.addEventListener('click',function () {
 		viz.renderWithCypher(getNodes("Language"));
 	});
+
+	AllNodes.addEventListener('click',function () {
+		viz.renderWithCypher("MATCH (N) RETURN N");
+    });
 }
 
 function relationshipsLabelsListener() {
@@ -129,6 +134,8 @@ function relationshipsLabelsListener() {
 	let VIA = document.getElementById("VIA");
 	let HAS_RETWEETED = document.getElementById("HAS_RETWEETED");
 	let IS_POSTED_FROM = document.getElementById("IS_POSTED_FROM");
+	let AllRelations = document.getElementById("allRel");
+
 	HAS_TWEETED.addEventListener('click',function () {
 		viz.renderWithCypher(getRelationShips("HAS_TWEETED"));
     });
@@ -156,9 +163,15 @@ function relationshipsLabelsListener() {
 		viz.renderWithCypher(getRelationShips("HAS_RETWEETED"));
 	});
 
+	AllRelations.addEventListener('click',function () {
+		viz.renderWithCypher("MATCH (N)-[R]->(M) RETURN N,R,M");
+    });
+
 	IS_POSTED_FROM.addEventListener('click',function () {
 		viz.renderWithCypher(getRelationShips("IS_POSTED_FROM"));
     });
+
+
 }
 
 nodeLabelsListener();

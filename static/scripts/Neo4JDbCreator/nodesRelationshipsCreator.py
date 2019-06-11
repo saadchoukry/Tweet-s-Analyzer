@@ -10,6 +10,7 @@ from search.models import research as R
 from py2neo.database import Schema
 from py2neo.data import Record
 
+
 class nodesRelationshipsCreator:
 
     def __init__(self):
@@ -33,10 +34,9 @@ class nodesRelationshipsCreator:
         matcher = NodeMatcher(self.graph)
         return matcher.match(nodeLabel, **properties).first()
 
-    def user_exists(self,screenName):
+    def user_exists(self, screenName):
         matcher = NodeMatcher(self.graph)
-        return matcher.match("User",screen_name=screenName).first()
-
+        return matcher.match("User", screen_name=screenName).first()
 
     def user_merge(self, primaryKeyValue, **properties):
         nodeMatch = self.user_exists(primaryKeyValue)
@@ -73,7 +73,8 @@ class nodesRelationshipsCreator:
                 if "entities" in (tweet["user"]):
                     del tweet["user"]["entities"]
                 newUser = self.user_merge(tweet["user"]["screen_name"], **tweet["user"])
-                self.node_relationship_merge(newUser, "Language", "TALKS", language=tweet["user"]["lang"])
+                print(tweet['lang'])
+                self.node_relationship_merge(newUser, "Language", "TALKS", language=tweet["lang"])
                 if str(tweet["user"]["location"]) != "None":
                     self.node_relationship_merge(newUser, "Location", "IS_FROM", location=tweet["user"]["location"])
 
@@ -132,6 +133,6 @@ class nodesRelationshipsCreator:
             relationShipCount[relationLabel] = self.getNumberOfOccurencesRelationships(relationLabel)
         return nodeLabelsCount, relationShipCount, numberOfLabelsCounter, numberOfRelLabelsCounter
 
-    def getRecord(self,cypherRequest):
+    def getRecord(self, cypherRequest):
         self.record = Record(self.graph.evaluate(cypherRequest))
         return dict(self.record)

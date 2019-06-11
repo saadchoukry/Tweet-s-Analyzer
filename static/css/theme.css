@@ -776,25 +776,18 @@ label {
   font-size: 13px;
   padding: 20px 0;
 }
-.footer * {
-  line-height: 20px;
-}
-.footer .link-social {
-  color: inherit;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-  margin-left: 15px;
-  text-decoration: none !important;
-  font-size: 18px;
-}
-.footer .link-social:hover {
-  opacity: 1;
-  filter: alpha(opacity=100);
+.footer {
+    clear: both;
+    position: relative;
+    height: 50px;
+    margin-top: -40px;
 }
 .section-contact .address-row {
   display: table;
   width: 100%;
 }
+
+
 .section-contact .address-sign {
   display: table-cell;
   width: 30px;

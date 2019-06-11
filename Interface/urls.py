@@ -24,6 +24,5 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('results/', include('results.urls')),
     path('admin/', admin.site.urls),
+    path('error/',searchViews.handler404)
 ]
-
-
