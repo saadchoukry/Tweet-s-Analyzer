@@ -3,55 +3,50 @@
 
 {% block title %} Previous researches{% endblock %}
 {% block previousResearches %}
-        <div class="col-8 list-group " style="margin: auto;">
-        {% if previousResearches %}
-             <div class="section-headlines mb-5 mt-3">
-                <h4 class="mb-0">Previous researches</h4>
-            </div>
-            {% for research in previousResearches %}
-                <a href="{% url 'results' research_id=research.researchId %}" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">
-                            {{ research.researchDate }}
-                        </h5>
-                        {% if research.researchType.type == "Upload" %}
-                        {{ research.numberOfTweets }} tweets uploaded
-                        {% else %}
-                        <small>{{ research.numberOfTweets }} tweets collected </small>
-                        {% endif %}
-                    </div>
+        <div class="col-8 list-group " style="margin: auto; padding-top: 69px; flex: 1;">
+            {% if previousResearches %}
+                 <div class="section-headlines mb-5 mt-3">
+                    <h4 class="mb-0">Previous researches</h4>
+                 </div>
+                {% for research in previousResearches %}
+                    <a href="{% url 'results' research_id=research.researchId %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">
+                                {{ research.researchDate }}
+                            </h5>
+                            {% if research.researchType.type == "Upload" %}
+                                {{ research.numberOfTweets }} tweets uploaded
+                            {% else %}
+                                <small>{{ research.numberOfTweets }} tweets collected </small>
+                            {% endif %}
+                        </div>
+                        <p class="mb-1">
+                            {% if research.researchType.type == "Stream" %}
+                                Keywords: {{ research.getKeywords }}
+                            {% elif research.researchType.type == "OffStream" %}
+                                {% if research.getKeywords2 %}
+                                    Keywords: {{ research.getKeywords2 }}
+                                {% elif research.getScreenName %}
+                                    Screen name: {{ research.getScreenName }}
+                                {% else %}
+                                    Hashtag: {{ research.getHashtags }}
+                                {% endif %}
+                            {% else %}
+                                Description : {{ research.getDescription }}
+                            {% endif %}
+                        </p>
+                        <small>Type : {{ research.researchType.type }}</small>
+                    </a>
+                    <br class="gap-70">
 
-                <p class="mb-1">
-                {% if research.researchType.type == "Stream" %}
-                    Keywords: {{ research.getKeywords }}
-                {% elif research.researchType.type == "OffStream" %}
-                    {% if research.getKeywords2 %}
-                        Keywords: {{ research.getKeywords2 }}
-                    {% elif research.getScreenName %}
-                        Screen name: {{ research.getScreenName }}
-                    {% else %}
-                        Hashtag: {{ research.getHashtags }}
-                    {% endif %}
-                {% else %}
-                    Description : {{ research.getDescription }}
-                {% endif %}
-
-                </p>
-                    <small>Type : {{ research.researchType.type }}</small>
-                </a>
-                <br class="gap-70">
-
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="m-auto mb-0">
+                    <img src="../../static/images/no_results_found.png">
+                </div>
+            {% endif %}
+            <br class="gap-70">
         </div>
-    </div>
-    {% else %}
-        <div class="m-auto mb-0">
-            <img src="../../static/images/no_results_found.png">
-        </div>
-    {% endif %}
-    <br class="gap-70">
-    </div>
-
 {% endblock %}
 
 
