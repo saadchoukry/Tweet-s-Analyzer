@@ -87,7 +87,7 @@ def streamSearch(request):
         post.numberOfTweets = twitter_streamer.main(request.POST['streamingDuration'],
                                                     StringToArray(request.POST['keywords']),
                                                     post.researchId)
-        post.executionduration = time.time() - start_time
+        post.executionDuration = time.time() - start_time
         post.ratio = float(post.numberOfTweets) / float(post.streamingDuration)
         post.resultsFileName = 'static/collected_data/results_{}.json' \
             .format(post.researchId)
@@ -125,7 +125,7 @@ def tagSearch(request):
         start_time = time.time()
         post.numberOfTweets = byHashTag.main(request.POST['count'], request.POST['since'], request.POST['tag'],
                                              post.researchId)
-        post.executionduration = time.time() - start_time
+        post.executionDuration = time.time() - start_time
         if post.executionDuration == 0.0:
             post.ratio = 0
         else:

@@ -54,6 +54,8 @@ def mapping(request, research_id):
     converter.updateValidLocationsRatio()
     converter.updateInvalidLocationsRatio()
     converter.updateUnknownLocationsRatio()
+    mappingStats = json.dumps({'Valid location ratio':converter.validLocationsRatio,'Invalid location ratio':converter.invalidLocationsRatio,'Unknown locations ratio':converter.unknownLocationsRatio}
+                              ,cls=DjangoJSONEncoder)
     dataToSendToJs = json.dumps(converter.countryCounter, cls=DjangoJSONEncoder)
     return render(request, 'template1/mapping.html', locals())
 
@@ -115,12 +117,13 @@ def advancedStats(request, research_id):
                 },
             ]
             for top in nodeRelationDict:
-                cypherReq = "CALL algo.pageRank.stream('{}', '{}', {{iterations:20, dampingFactor:0.85}}) YIELD nodeId , " \
+                cypherReq = "CALL algo.pageRank.stream('{}', '{}', {{direction:'BOTH', iterations:20, dampingFactor:0.85}}) YIELD nodeId , " \
                             "score RETURN algo.asNode(nodeId).{} AS page , score ORDER BY score DESC LIMIT 5".format(
                     top["nodeLabel"], top["relationShip"], top["attribute"])
                 resultsDict.append(graphData.run(cypherReq).data())
+            dataToSendToJs = json.dumps(resultsDict, cls=DjangoJSONEncoder)
             return render(request, 'template1/advancedStats.html', {'results': resultsDict
-                , 'inputs': nodeRelationDict})
+                , 'inputs': nodeRelationDict,'dataToSendToJs':dataToSendToJs})
         else:
             return render(request,'500.html')
     else:

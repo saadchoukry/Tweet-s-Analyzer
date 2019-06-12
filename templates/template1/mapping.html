@@ -2,39 +2,24 @@
 {% load static %}
 {% block title %} Mapping{% endblock %}
 {% block mapping %}
-
-<div class="section type-2" style="padding:10px 0;">
+<script src="{% static 'scripts/advancedStats.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!--
+    <div class="section type-2" style="padding-top: 69px; flex: 1;">
     <div class="section-headlines" style="margin-bottom: 0;">
     <h4 style="padding-bottom: 0;margin-bottom: 0;">Mapping</h4>
     </div>
-</div>
+</div>-->
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4 text-center ">
-            <div class="border rounded p-3 m-0 list-group-item-action">
-                <i class="fas fa-check h1"></i><br>
-                Valid locations ratio : {{ converter.validLocationsRatio }}%
-            </div>
+<div class="container" style="flex: 1; margin-right: 10px;">
+    <div class="row border" style="padding-left: 0px;">
+        <div class="mr-lg-auto">
+            <canvas id="mappingStats"></canvas>
         </div>
-        <div class="col-lg-4 text-center">
-            <div class="border rounded p-3 m-0 list-group-item-action">
-                <i class="far fa-times-circle h1"></i><br>
-                Unrecognized locations ratio : {{ converter.invalidLocationsRatio }}%
-            </div>
-        </div>
-        <div class="col-lg-4 text-center">
-            <div class="border rounded p-3 m-0 list-group-item-action">
-                <i class="fas fa-question h1"></i><br>
-                Unknown locations ratio: {{ converter.unknownLocationsRatio }}%
-            </div>
+        <div class="col-lg-10 ml-lg-auto border ">
+            <div  id="container180" style="position: relative; margin:auto;height: 500px;padding-top: 0px;"></div>
         </div>
     </div>
-</div>
-
-<div class="container">
-    <div  id="container180" style="position: relative; margin:auto;height: 700px;"></div>
 </div>
 <script src="../../static/scripts/d3.min.js"></script>
 <script src="../../static/scripts/topojson.min.js"></script>
@@ -60,6 +45,12 @@
     }
     });
     map.legend();
+</script>
+
+<script>
+    var received_mapping_data = {{ mappingStats|safe}};
+    console.log(received_mapping_data);
+    statsDrawerMapping(received_mapping_data,'mappingStats','Locations info');
 </script>
     <br class="gap-70">
     <br class="gap-70">

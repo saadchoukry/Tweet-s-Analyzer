@@ -9,7 +9,7 @@
 
 <div class="container-fluid" style="flex: 1;">
     <div class="row mt-0">
-         <div class="col-lg-2 mr-auto " >
+        <div class="col-lg-2 mr-auto " style="margin-top: 80px;">
                 <div class="text-center">
                         <div class="border rounded p-2 m-0 list-group-item-action" id="Visualize">
                             <i style="color:dodgerblue;" class="fas fa-play h1"></i><br>
@@ -24,11 +24,12 @@
          </div>
 
         <div class="col-lg-8 text-center" id="mainDiv"  style="border: 3px solid lightgray;
-                font: 22pt arial;display:block;height:420px;">
-            <img class="mt-lg-5" src="{% static "images/vizDefault.png"%}" style="height: 300px;">
+                font: 22pt arial;display:block;height:420px; margin-top: 20px;">
+            <img src="{% static "images/node.png"%}" style="height: 440px;">
+            <img src="{% static "images/neo4j_logo.png"%}" style="width: 400px;">
         </div>
         <div class="col-lg-2">
-            <ul class="list-group">
+            <ul class="list-group" style="margin-top: 80px;">
                 <a id="nodeLabels" href="#" class="list-group-item-action flex-column align-items-start ">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                     Nodes
@@ -71,13 +72,18 @@
                 </a>
             {% endfor %}
             </div>
+
+            <div style="position: absolute;bottom: 0px;">Powered by :
+                <img src="../../static/images/neo4j_logo.png" style="width: 120px;"  alt="">
             </div>
+
+        </div>
     </div>
 
     <br>
 
     <div class="row">
-        <div class="col-6 offset-lg-3 text-center" style="position: absolute;bottom: 100px;">
+        <div class="col-6 offset-lg-3 text-center" style="position: absolute;bottom: 75px;">
             <a href="{% url 'advancedStats' research_id %}">
                 <button  class="btn btn-primary actiongif" style="width: 170px;height:50px;"><i class="fas fa-chart-line"></i> Advanced stats</button>
             </a>
@@ -87,19 +93,10 @@
             </a>
         </div>
     </div>
-
-       <div class="row" >
-         <div class="col-3 offset-lg-5 mt-2 mb-2" style="position: absolute;bottom: 40px;">Powered by :
-             <img src="../../static/images/neo4j_logo.png" style="width: 120px;height: 50px;"  alt="">
-         </div>
-     </div>
-
-        <br class="gap-70">
 </div>
 
 
 
-    <br class="gap-70">
 
     <script src="../../static/scripts/neovis.js"></script>
     <script src="../../static/scripts/visualization.js"></script>

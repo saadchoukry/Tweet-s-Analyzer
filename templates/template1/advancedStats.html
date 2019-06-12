@@ -4,63 +4,39 @@
 {% endblock %}
 
 {% block advancedStats %}
+<script src="{% static 'scripts/advancedStats.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <div class="section type-2" style="padding-top: 60px;">
     <div class="container">
-    <div class="section-headlines"    style="margin-bottom: 30px;">
-    <h4>Rankings</h4>
+        <div class="section-headlines" style="margin-bottom: 30px;">
+        <h4>Rankings</h4>
+        </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
-    {% for stat in results %}
-            <table class="col-lg-5 offset-lg-1 table table-hover text-center" >
-                  <caption class="text-center" style="caption-side: top;">
-                      {% if forloop.counter == 1 %}
-                          <h4>Most mentioning users </h4>
-                          <br>
-                      {% elif forloop.counter == 2  %}
-                          <h4>Most tagged tweets </h4>
-                          <br>
-                      {% elif forloop.counter == 3  %}
-                          <br>
-                          <br>
-                          <h4>most tweeting users </h4>
-                          <br>
-
-                      {% elif forloop.counter == 4  %}
-                           <br>
-                           <br>
-                          <h4>most retweeted tweets </h4>
-                          <br>
-                      {% endif %}
-                  </caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Ranking</th>
-                      {% if forloop.counter == 1 %}
-                            <th scope="col">Screen name</th>
-                      {% elif forloop.counter == 2  %}
-                            <th scope="col">Tweet text</th>
-                      {% elif forloop.counter == 3  %}
-                            <th scope="col">Screen name</th>
-                      {% elif forloop.counter == 4  %}
-                            <th scope="col">Tweet text</th>
-                      {% endif %}
-                      <th scope="col">Score</th>
-                    </tr>
-                  </thead>
-            {% for element in stat %}
-                  <tbody>
-                    <tr >
-                      <td scope="row">{{ forloop.counter }}</td>
-                      <td scope="col">{{element.page|truncatechars:20 }}</td>
-                      <td scope="col">{{element.score|floatformat:2 }}</td>
-                    </tr>
-            {% endfor %}
-            </tbody>
-            </table>
-{% endfor %}
+        <div class="col-lg-5">
+            <canvas id="userMentions"></canvas>
+        </div>
+        <div class="col-lg-5">
+            <canvas id="userM"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <canvas id="tweet1"></canvas>
+        </div>
+        <div class="col-lg-5">
+            <canvas id="tweet2"></canvas>
+        </div>
     </div>
 </div>
-</div>
+    <script>
+        var received_data  = {{ dataToSendToJs|safe }} ;
+        statsDrawer(received_data[0],'userMentions','1','radar','rgb(0,172,238)');
+        statsDrawer(received_data[1],'tweet1','2','bar');
+        statsDrawer(received_data[2],'userM','3','line');
+        statsDrawer(received_data[3],'tweet2','4','doughnut');
+    </script>
 {% endblock %}

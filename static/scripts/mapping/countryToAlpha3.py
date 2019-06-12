@@ -59,10 +59,10 @@ class countryToALpha3:
                 country["fillKey"] = "LOW"
 
     def updateValidLocationsRatio(self):
-        self.validLocationsRatio = int((len(self.locations) / self.totalTweets) * 100)
+        self.validLocationsRatio = len(self.locations)
 
     def updateInvalidLocationsRatio(self):
-        self.invalidLocationsRatio = int(((len(self.locations) - self.total)/self.totalTweets)*100)
+        self.invalidLocationsRatio = len(self.locations) - self.total
 
     def updateUnknownLocationsRatio(self):
-        self.unknownLocationsRatio = int(100-(self.invalidLocationsRatio+self.validLocationsRatio))
+        self.unknownLocationsRatio = self.totalTweets - len(self.locations)
