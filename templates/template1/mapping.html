@@ -4,20 +4,25 @@
 {% block mapping %}
 <script src="{% static 'scripts/advancedStats.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <!--
-    <div class="section type-2" style="padding-top: 69px; flex: 1;">
-    <div class="section-headlines" style="margin-bottom: 0;">
-    <h4 style="padding-bottom: 0;margin-bottom: 0;">Mapping</h4>
-    </div>
-</div>-->
 
-<div class="container" style="flex: 1; margin-right: 10px;">
-    <div class="row border" style="padding-left: 0px;">
-        <div class="mr-lg-auto">
-            <canvas id="mappingStats"></canvas>
+<div class="section type-2" style="padding-top: 10px; padding-bottom: 0px;flex: 1;">
+    <div class="section-headlines" style="margin-bottom: 0;">
+        <h4 style="padding-bottom: 0;margin-bottom: 0;">Mapping</h4>
+    </div>
+</div>
+
+<div class="container" style="flex: 1; margin-left: 0px; width: 1325px; padding-left: 0px;">
+    <div class="d-flex">
+        <div class="mr-auto col-lg-4" style="padding-right: 0px; padding-left: 0px;">
+            <div>
+                <canvas id="mappingStats"></canvas>
+            </div>
+            <div style="margin-top: 25px;">
+                <canvas id="topCountries"></canvas>
+            </div>
         </div>
-        <div class="col-lg-10 ml-lg-auto border ">
-            <div  id="container180" style="position: relative; margin:auto;height: 500px;padding-top: 0px;"></div>
+        <div class="col-lg-11 ml-auto">
+            <div  id="container180" style="position: relative; height: 455px; width: 950px;"></div>
         </div>
     </div>
 </div>
@@ -29,10 +34,11 @@
     var map = new Datamap({element: document.getElementById('container180'),
     fills: {
 
-            HIGH: '#CB4335',
-            LOW: '#5ac748',
-            MEDIUM: '#2650c7',
-            defaultFill: 'grey'
+            HIGH: 'rgba(255, 0, 0,0.75)',
+            MEDIUM: 'rgba(0,0,255,0.75)',
+            LOW: 'rgba(90, 199, 72,0.69)',
+
+            defaultFill: 'rgba(128,128,128,0.5)'
         },
         data: received_data,
         geographyConfig: {
@@ -51,6 +57,9 @@
     var received_mapping_data = {{ mappingStats|safe}};
     console.log(received_mapping_data);
     statsDrawerMapping(received_mapping_data,'mappingStats','Locations info');
+
+    var received_countries_data= {{ topCountriesData|safe }};
+    topCountriesDrawer(received_countries_data,'topCountries','Top tweeting countries');
 </script>
     <br class="gap-70">
     <br class="gap-70">

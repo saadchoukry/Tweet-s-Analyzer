@@ -1,3 +1,6 @@
+import collections
+import itertools
+import operator
 from pprint import pprint
 from neo4jAuth import neo4jAuth
 
@@ -46,18 +49,31 @@ def results(request, research_id):
 
 # MAPPING
 def mapping(request, research_id):
-    converter = countryToALpha3(research_id)
-    converter.getAlpha2Countries()
-    converter.getAlpha3Countries()
-    converter.getCountryCount()
-    converter.updateFillKeys()
-    converter.updateValidLocationsRatio()
-    converter.updateInvalidLocationsRatio()
-    converter.updateUnknownLocationsRatio()
-    mappingStats = json.dumps({'Valid location ratio':converter.validLocationsRatio,'Invalid location ratio':converter.invalidLocationsRatio,'Unknown locations ratio':converter.unknownLocationsRatio}
-                              ,cls=DjangoJSONEncoder)
-    dataToSendToJs = json.dumps(converter.countryCounter, cls=DjangoJSONEncoder)
-    return render(request, 'template1/mapping.html', locals())
+        converter = countryToALpha3(research_id)
+        converter.getAlpha2Countries()
+        converter.getAlpha3Countries()
+        converter.getCountryCount()
+        converter.updateFillKeys()
+        converter.updateValidLocationsRatio()
+        converter.updateInvalidLocationsRatio()
+        converter.updateUnknownLocationsRatio()
+        mappingStats = json.dumps({'Valid location ratio': converter.validLocationsRatio,
+                                   'Invalid location ratio': converter.invalidLocationsRatio,
+                                   'Unknown locations ratio': converter.unknownLocationsRatio}
+                                  , cls=DjangoJSONEncoder)
+        dataToSendToJs = json.dumps(converter.countryCounter, cls=DjangoJSONEncoder)
+
+
+        for country in converter.countryCounter:
+            converter.topCountries[converter.getFullCountry(country)] = converter.countryCounter[country][
+                "numberOfThings"]
+        sortedCountries = sorted(converter.topCountries.items(), key=operator.itemgetter(1))
+        sortedCountriesDict = collections.OrderedDict(sortedCountries)
+        sortedCountriesDict = collections.OrderedDict(reversed(list(sortedCountriesDict.items())))
+        topCountriesData = collections.OrderedDict(itertools.islice(sortedCountriesDict.items(), 5))
+        print(topCountriesData)
+        topCountriesData = json.dumps(topCountriesData, cls=DjangoJSONEncoder)
+        return render(request, 'template1/mapping.html', locals())
 
 
 # MAPPING [END]

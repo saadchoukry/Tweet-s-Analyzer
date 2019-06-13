@@ -19,6 +19,7 @@ class countryToALpha3:
                 if str(tweet["user"]["location"]) != "None":
                     self.locations.append(tweet["user"]["location"])
         self.countries = []
+        self.topCountries = {}
         self.alpha2Countries = []
         self.alpha3Countries = []
         self.countryCounter = {}
@@ -66,3 +67,8 @@ class countryToALpha3:
 
     def updateUnknownLocationsRatio(self):
         self.unknownLocationsRatio = self.totalTweets - len(self.locations)
+
+    def getFullCountry(self, alpha3):
+        c = pycountry.countries.get(alpha_3=alpha3)
+        if c is not None:
+            return c.name
