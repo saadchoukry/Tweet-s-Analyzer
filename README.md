@@ -13,3 +13,8 @@ This repository contains the source code of a twitter analysis solution. It cons
 pip install requirements.txt
 ```
 
+## Running the project
+Tweet's Analyzer visualizations are made using chartJs and django, to start the server, execute the following command:
+```
+python manage.py runserver
+```
