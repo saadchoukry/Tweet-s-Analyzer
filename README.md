@@ -1,7 +1,7 @@
 # Tweets' Analyzer
-![Image](https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true)
+
 <p align="center">
-  <img width="380" height="300" src="https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true">
+  <img src="https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true">
 </p>
 
 This repository contains the source code of a twitter analysis solution. It consists of using a graph-oriented database to design and build a tweet's analysis solution. Its main functionalities are:
@@ -16,10 +16,9 @@ Collecting tweets, analyzing, visualizing and mapping; these are the steps a use
 Once the data has been collected, we obtain a JSON format file that must be used to generate the graph associated with the research.
 The diagram below represents the model that was defined in order to perform this task:
 
-
-
-![Image](https://media.discordapp.net/attachments/616373618976358563/790170637830062090/NEO_SCHEMA.png)
-
+<p align="center">
+  <img  src="https://media.discordapp.net/attachments/616373618976358563/790170637830062090/NEO_SCHEMA.png?raw=true">
+</p>
 ## Requirements
 ```
 pip install requirements.txt
