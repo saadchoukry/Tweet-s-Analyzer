@@ -5,7 +5,7 @@ This repository contains the source code of a twitter analysis solution. It cons
   - View/visualize the results
   
 
-##Requirements
+## Requirements
 ```
 pip install requirements.txt
 ```
