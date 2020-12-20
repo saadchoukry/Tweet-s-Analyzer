@@ -1,7 +1,7 @@
 # Tweets' Analyzer
 ![Image](https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true)
 <p align="center">
-  <img width="460" height="300" src="https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true">
+  <img width="380" height="300" src="https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true">
 </p>
 
 This repository contains the source code of a twitter analysis solution. It consists of using a graph-oriented database to design and build a tweet's analysis solution. Its main functionalities are:
