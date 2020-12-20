@@ -1,4 +1,3 @@
-# Tweets' Analyzer
 
 <p align="center">
   <img src="https://github.com/saadchoukry/Tweet-s-Analyzer/blob/master/static/images/Tweets_analyzer.png?raw=true">
