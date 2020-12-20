@@ -15,6 +15,7 @@ The diagram below represents the model that was defined in order to perform this
 <p align="center">
   <img  src="https://media.discordapp.net/attachments/616373618976358563/790170637830062090/NEO_SCHEMA.png?raw=true">
 </p>
+
 ## Requirements
 ```
 pip install requirements.txt
